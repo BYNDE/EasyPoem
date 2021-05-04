@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">EasyPoem</string>
+    <string name="title_my_poems">Библиотека</string>
+    <string name="title_compass">Интересное</string>
+    <string name="title_profile">Профиль</string>
+    <string name="fab_add">Добавить</string>
+    <string name="fab_search">Найти</string>
+    <string name="fab_create">Создать</string>
+    <string name="imagebutton_back">imageButton_back</string>
+    <string name="folders">Папки</string>
+    <string name="show_all">Смотреть все</string>
+    <string name="poems">Стихотворения</string>
+</resources>
