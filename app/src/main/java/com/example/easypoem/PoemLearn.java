@@ -100,7 +100,8 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
-        if (v.getTag().equals(word)) {
+        String temp = ET.getText().toString();
+        if (v.getTag().equals(word) || temp.equals(word)) {
             phase++;
             if (phase < countPhase) {
                 mass[wordid] = word;
