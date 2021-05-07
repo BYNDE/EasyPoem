@@ -10,70 +10,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
-        android:layout_marginBottom="670dp">
+        android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TV_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Название"
+                android:textAlignment="center"
+                android:textColor="@color/orange"
+                android:textSize="30dp"/>
+
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_card"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
+
 
         <TextView
-            android:id="@+id/TV_title"
+            android:id="@+id/TV_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Название"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="30dp"/>
+            android:textColor="@color/gray_hint"
+            android:gravity="center_horizontal"
+            android:text="Текст"
+            android:textSize="15dp"/>
+
+
+        </ScrollView>
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="60dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/TV_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/black"
-                android:text="ТЕкст"
-                android:textSize="15dp"/>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="630dp"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/BTN_back"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Вернутся"
-            android:textSize="25dp"
-            android:textColor="@color/black"
+            android:text="Вернуться"
+            android:textSize="18dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/orange"
             android:textAlignment="center"/>
 
         <Button
             android:id="@+id/BTN_next"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Продолжить"
-            android:textColor="@color/black"
-            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orange"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="5dp"
+            android:textAllCaps="false"
+            android:textSize="18dp"
             android:textAlignment="center"/>
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

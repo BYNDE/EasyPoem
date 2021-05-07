@@ -6,72 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".PoemLearn">
 
-    <LinearLayout
+<LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="top"
-        android:layout_marginBottom="670dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="top">
 
         <TextView
             android:id="@+id/TV_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Прочитайте несколько раз"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/orange"
             android:textSize="30dp"/>
 
-    </LinearLayout>
-
-    <ScrollView
+        <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="60dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_card"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp">
 
             <TextView
                 android:id="@+id/TV_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/black"
-                android:text="Тукст"
+                android:textColor="@color/gray_hint"
+                android:gravity="center_horizontal"
+                android:text="Текст"
                 android:textSize="18dp"/>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+</LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/LL_Start"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="630dp"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/BTN_next"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Продолжить"
-            android:textColor="@color/black"
-            android:textSize="25dp"
-            android:textAlignment="center"/>
-
-    </LinearLayout>
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
     <LinearLayout
         android:id="@+id/LL_Learn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="630dp"
         android:gravity="bottom"
         android:orientation="horizontal"
         android:visibility="invisible">
@@ -79,34 +59,75 @@
         <Button
             android:id="@+id/BTN_variant1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Слово"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orange"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:textSize="20dp"
             android:textAlignment="center"/>
 
         <Button
             android:id="@+id/BTN_variant2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Слово"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/orange"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:textSize="20dp"
             android:textAlignment="center"/>
 
         <Button
             android:id="@+id/BTN_variant3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/orange"
             android:text="Слово"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
             android:textSize="20dp"
             android:textAlignment="center"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LL_Start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/BTN_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Продолжить"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/orange"
+            android:textSize="25dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+</FrameLayout>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
