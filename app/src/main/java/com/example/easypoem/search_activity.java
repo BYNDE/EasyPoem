@@ -1,6 +1,7 @@
 package com.example.easypoem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,8 +12,10 @@ import android.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-public class search_activity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class search_activity extends AppCompatActivity {
+    ArrayList<search_output> states = new ArrayList<search_output>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,29 @@ public class search_activity extends AppCompatActivity {
         if (searchPlate!=null) {
             searchPlate2.setBackgroundColor (Color.TRANSPARENT);
         }
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+                states.clear();
+                setInitialData();
+                recyclerView.setAdapter(adapter);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String newText) {
+                states.clear();
+                setInitialData();
+                recyclerView.setAdapter(adapter);
+                return true;
+            }
+        });
+
+
+
 
         searchView.post(new Runnable() {
             @Override
@@ -61,5 +87,17 @@ public class search_activity extends AppCompatActivity {
         Intent intent = new Intent(search_activity.this,MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_down, 0);
+    }
+
+    private void firebase_poems_search(){
+    
+    }
+
+    private void setInitialData(){
+
+        states.add(new search_output("Россия в 1918 году", "Михаил Зенкевич"));
+        states.add(new search_output ("Еще одно забывчивое слово", "Афанасий Фет"));
+        states.add(new search_output ("Афиши", "Николай Доризо"));
+
     }
 }
