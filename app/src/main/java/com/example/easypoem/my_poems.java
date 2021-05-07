@@ -2,6 +2,7 @@ package com.example.easypoem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -36,25 +37,34 @@ public class my_poems extends Fragment {
         FloatingActionButton button_new_folder = view.findViewById(R.id.fab_new_folder);
         FloatingActionButton button_new_poem = view.findViewById(R.id.fab_new_poem);
 
+
+        button_new_poem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),add_my_poem.class);
+                startActivity(intent);
+            }
+        });
+
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout add_folder = view.findViewById(R.id.add_folder_layout);
-                LinearLayout add_poem = view.findViewById(R.id.add_poem_layout);
-                LinearLayout normal_folder = view.findViewById(R.id.folders_layout);
-                LinearLayout normal_poem = view.findViewById(R.id.poems_layout);
-                if(!clicked){
-                    add_folder.setVisibility(View.INVISIBLE);
-                    add_poem.setVisibility(View.INVISIBLE);
-                    normal_folder.setVisibility(View.VISIBLE);
-                    normal_poem.setVisibility(View.VISIBLE);
-
-                }else{
-                    add_folder.setVisibility(View.VISIBLE);
-                    add_poem.setVisibility(View.VISIBLE);
-                    normal_folder.setVisibility(View.INVISIBLE);
-                    normal_poem.setVisibility(View.INVISIBLE);
-                }
+//                LinearLayout add_folder = view.findViewById(R.id.add_folder_layout);
+//                LinearLayout add_poem = view.findViewById(R.id.add_poem_layout);
+//                LinearLayout normal_folder = view.findViewById(R.id.folders_layout);
+//                LinearLayout normal_poem = view.findViewById(R.id.poems_layout);
+//                if(!clicked){
+//                    add_folder.setVisibility(View.INVISIBLE);
+//                    add_poem.setVisibility(View.INVISIBLE);
+//                    normal_folder.setVisibility(View.VISIBLE);
+//                    normal_poem.setVisibility(View.VISIBLE);
+//
+//                }else{
+//                    add_folder.setVisibility(View.VISIBLE);
+//                    add_poem.setVisibility(View.VISIBLE);
+//                    normal_folder.setVisibility(View.INVISIBLE);
+//                    normal_poem.setVisibility(View.INVISIBLE);
+//                }
                 onAddButtonClicked(button_add,button_new_folder,button_new_poem);
             }
         });

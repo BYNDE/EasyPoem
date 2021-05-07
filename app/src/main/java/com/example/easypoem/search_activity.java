@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -90,7 +92,8 @@ public class search_activity extends AppCompatActivity {
     }
 
     private void firebase_poems_search(){
-    
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("poems");
+        
     }
 
     private void setInitialData(){
