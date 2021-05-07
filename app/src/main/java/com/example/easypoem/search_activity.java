@@ -1,20 +1,24 @@
 package com.example.easypoem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-public class search_activity extends AppCompatActivity {
+public class search_activity extends AppCompatActivity implements search_output_item_adapter.OnNoteListener{
     ArrayList<search_output> states = new ArrayList<search_output>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class search_activity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states);
+        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
@@ -55,8 +59,6 @@ public class search_activity extends AppCompatActivity {
                 return true;
             }
         });
-
-
 
 
         searchView.post(new Runnable() {
@@ -99,5 +101,13 @@ public class search_activity extends AppCompatActivity {
         states.add(new search_output ("Еще одно забывчивое слово", "Афанасий Фет"));
         states.add(new search_output ("Афиши", "Николай Доризо"));
 
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+        Intent intent = new Intent(this, PoemRead.class);
+        intent.putExtra("title", states.get(position).getTitle());
+        intent.putExtra("text", states.get(position).getTitle());
+        startActivity(intent);
     }
 }
