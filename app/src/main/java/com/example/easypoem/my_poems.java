@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +35,8 @@ public class my_poems extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.my_poems_fragment, container, false);
 
+        ImageButton imageButton =view.findViewById(R.id.add_poem_button);
+
         FloatingActionButton button_add = view.findViewById(R.id.fab_add);
         FloatingActionButton button_new_folder = view.findViewById(R.id.fab_new_folder);
         FloatingActionButton button_new_poem = view.findViewById(R.id.fab_new_poem);
@@ -45,6 +48,14 @@ public class my_poems extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),add_my_poem.class);
+                startActivity(intent);
+            }
+        });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), add_my_poem.class);
                 startActivity(intent);
             }
         });

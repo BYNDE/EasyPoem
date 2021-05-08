@@ -35,9 +35,9 @@ public class search_activity extends AppCompatActivity implements search_output_
         getSupportActionBar().hide();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(this , android.R.layout.lis , states, this);
+        search_output_item_adapter adapter = new search_output_item_adapter(this, states, this);
         states.clear();
-        firebase_poems_search();
+        firebase_poems_search("");
         recyclerView.setAdapter(adapter);
 
 
@@ -58,7 +58,7 @@ public class search_activity extends AppCompatActivity implements search_output_
             @Override
             public boolean onQueryTextSubmit(final String query) {
                 states.clear();
-                firebase_poems_search();
+                firebase_poems_search(query);
                 recyclerView.setAdapter(adapter);
 
                 return false;
@@ -67,7 +67,7 @@ public class search_activity extends AppCompatActivity implements search_output_
             @Override
             public boolean onQueryTextChange(final String newText) {
                 states.clear();
-                firebase_poems_search();
+                firebase_poems_search(newText);
                 recyclerView.setAdapter(adapter);
 
                 return true;
@@ -106,10 +106,10 @@ public class search_activity extends AppCompatActivity implements search_output_
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
 
-    private void firebase_poems_search(){
+    private void firebase_poems_search(String str){
         // Obtain the FirebaseAnalytics instance.
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        for (int i = 0; i < 300; i++) {
+        for (int i = 0; i < 1000; i++) {
             DatabaseReference myRef = database.getReference("poems/" + i);
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -118,8 +118,11 @@ public class search_activity extends AppCompatActivity implements search_output_
                     // whenever data at this location is updated.
                     search_output value = dataSnapshot.getValue(search_output.class);
                     value.text = value.author;
-
-                    states.add(value);
+                    value.author = "Author";
+                    if (str != "")
+                        if (value.title == str)
+                            states.add(value);
+                    else states.add(value);
                 }
 
                 @Override

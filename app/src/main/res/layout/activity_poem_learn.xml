@@ -22,23 +22,23 @@
             android:textColor="@color/orange"
             android:textSize="30dp"/>
 
-        <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_card"
+        android:layout_height="match_parent"
         android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp">
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/border_card">
 
-            <TextView
-                android:id="@+id/TV_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/gray_hint"
-                android:gravity="center_horizontal"
-                android:text="Текст"
-                android:textSize="18dp"/>
+        <TextView
+            android:id="@+id/TV_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="Текст"
+            android:textColor="@color/gray_hint"
+            android:textSize="18dp" />
 
-        </ScrollView>
+    </ScrollView>
 
 </LinearLayout>
 
