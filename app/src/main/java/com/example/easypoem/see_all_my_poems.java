@@ -28,7 +28,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         String[] mass_text =new String[mass.length];
         if (mass.length>0){
             for (int i = 0; i < mass.length; i++) {
-                states.add(new search_output(mass[i][0], mass[i][1],mass[i][2]));
+                states.add(new search_output(mass[i][0], mass[i][2], mass[i][1], Long.valueOf(mass[i][3])));
             }
         }
 

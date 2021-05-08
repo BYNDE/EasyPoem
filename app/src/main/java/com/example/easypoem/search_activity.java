@@ -1,6 +1,5 @@
 package com.example.easypoem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,22 +7,17 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -39,6 +33,9 @@ public class search_activity extends AppCompatActivity implements search_output_
         setContentView(R.layout.activity_search_activity);
 
         getSupportActionBar().hide();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
 
         SearchView searchView = findViewById(R.id.search_view);
         int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_plate", null, null);
@@ -56,19 +53,19 @@ public class search_activity extends AppCompatActivity implements search_output_
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-//                states.clear();
-//                setInitialData();
-//                recyclerView.setAdapter(adapter);
+                states.clear();
                 firebase_poems_search();
+                recyclerView.setAdapter(adapter);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(final String newText) {
-//                states.clear();
-//                setInitialData();
-//                recyclerView.setAdapter(adapter);
+                states.clear();
                 firebase_poems_search();
+                recyclerView.setAdapter(adapter);
+
                 return true;
             }
         });
@@ -107,24 +104,25 @@ public class search_activity extends AppCompatActivity implements search_output_
 
     private void firebase_poems_search(){
         // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("poems");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                search_output value = dataSnapshot.getValue(search_output.class);
-                Log.d("fff", "Value is: " + value.getAuthor());
-            }
+        for (int i = 0; i < 300; i++) {
+            DatabaseReference myRef = database.getReference("poems/" + i);
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    search_output value = dataSnapshot.getValue(search_output.class);
+                    states.add(value);
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("fff", "Failed to read value.", error.toException());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("fff", "Failed to read value.", error.toException());
+                }
+            });
+        }
     }
 
     private void setInitialData(){
@@ -140,7 +138,7 @@ public class search_activity extends AppCompatActivity implements search_output_
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, PoemRead.class);
         intent.putExtra("title", states.get(position).getTitle());
-        intent.putExtra("text", states.get(position).getTitle());
+        intent.putExtra("text", states.get(position).getText());
         startActivity(intent);
     }
 }
