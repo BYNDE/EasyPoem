@@ -35,7 +35,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         getSupportActionBar().hide();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
+        search_output_item_adapter adapter = new search_output_item_adapter(this, states, this);
         states.clear();
         firebase_poems_search();
         recyclerView.setAdapter(adapter);
@@ -117,6 +117,8 @@ public class search_activity extends AppCompatActivity implements search_output_
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
                     search_output value = dataSnapshot.getValue(search_output.class);
+                    value.text = value.author;
+
                     states.add(value);
                 }
 
