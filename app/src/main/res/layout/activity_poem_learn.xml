@@ -111,7 +111,7 @@
         <Button
             android:id="@+id/BTN_back"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Вернуться"
             android:textSize="18dp"
@@ -126,7 +126,7 @@
         <Button
             android:id="@+id/BTN_next"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Продолжить"
             android:textColor="@color/white"
