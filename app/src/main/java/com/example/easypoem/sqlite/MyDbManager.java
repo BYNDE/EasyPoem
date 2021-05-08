@@ -33,7 +33,7 @@ public class MyDbManager {
     public String[][] getFromDb(){
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,null,null,null,
         null, null);
-        String [][] mass = new String[cursor.getCount()][3];
+        String [][] mass = new String[cursor.getCount()][4];
 
         int a = 0;
         while(cursor.moveToNext()){
@@ -43,6 +43,8 @@ public class MyDbManager {
             mass[a][0] = title;
             mass[a][1] = author;
             mass[a][2] = text;
+            mass[a][3] = "3";
+
             a++;
         }
         cursor.close();
