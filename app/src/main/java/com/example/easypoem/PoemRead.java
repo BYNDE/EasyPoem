@@ -28,7 +28,7 @@ public class PoemRead extends AppCompatActivity {
         findViewById(R.id.BTN_next).setOnClickListener(v -> {
             Intent intent = new Intent(this, PoemLearn.class);
             intent.putExtra("title", T_title.getText().toString());
-            intent.putExtra("text", T_title.getText().toString());
+            intent.putExtra("text", T_text.getText().toString());
             startActivity(intent);
         });
     }
