@@ -13,6 +13,7 @@ public class PoemRead extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_read);
+        getSupportActionBar().hide();
 
         TextView T_title = findViewById(R.id.TV_title);
         TextView T_text = findViewById(R.id.TV_text);

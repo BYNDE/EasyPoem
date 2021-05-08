@@ -40,6 +40,7 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_learn);
+        getSupportActionBar().hide();
 
         String default_title = getIntent().getExtras().getString("title");
         String default_text = getIntent().getExtras().getString("text");
