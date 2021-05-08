@@ -9,8 +9,10 @@ public class MyConstant {
     public static final String DB_NAME = "users_poems.db";
     public static final int VERSION = 1;
 
-    public static  final String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS"+
-            TABLE_NAME+" ("+_ID+" INTEGER PRIMARY KEY,"+TITLE+"TEXT,"+AUTHOR+;
+    public static  final String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "+
+            TABLE_NAME+" ("+_ID+" INTEGER PRIMARY KEY,"+TITLE+" TEXT,"+AUTHOR+" TEXT,"+
+            TEXT+" TEXT)";
+    public static final String TABLE_DROP = "DROP TABLE IF EXISTS "+TABLE_NAME;
 
 
 }

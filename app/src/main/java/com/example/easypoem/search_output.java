@@ -1,8 +1,8 @@
 package com.example.easypoem;
 
 public class search_output {
-    private String title;
-    private String author;
+    public String title;
+    public String author;
 
     public search_output(String title, String author){
 

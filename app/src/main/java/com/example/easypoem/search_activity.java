@@ -12,9 +12,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,22 +47,22 @@ public class search_activity extends AppCompatActivity implements search_output_
             searchPlate2.setBackgroundColor (Color.TRANSPARENT);
         }
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-                states.clear();
-                setInitialData();
-                recyclerView.setAdapter(adapter);
+//                states.clear();
+//                setInitialData();
+//                recyclerView.setAdapter(adapter);
+                firebase_poems_search();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(final String newText) {
-                states.clear();
-                setInitialData();
-                recyclerView.setAdapter(adapter);
+//                states.clear();
+//                setInitialData();
+//                recyclerView.setAdapter(adapter);
+                firebase_poems_search();
                 return true;
             }
         });
@@ -73,6 +78,7 @@ public class search_activity extends AppCompatActivity implements search_output_
                 searchView.requestFocus();
             }
         });
+
 
         findViewById(R.id.imageButton_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,8 +100,31 @@ public class search_activity extends AppCompatActivity implements search_output_
     }
 
     private void firebase_poems_search(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("poems");
-        
+      Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").equalTo("Шашки");
+    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+    System.out.print(query);
+    search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
+        ValueEventListener vListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (states.size()>0)states.clear();
+                if (snapshot.exists()){
+                    for (DataSnapshot ds : snapshot.getChildren()){
+                        search_output data = ds.getValue(search_output.class);
+                        states.add(data);
+                    }
+                    recyclerView.setAdapter(adapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.print("3kljg;lkdj");
+            }
+        };
+        query.addListenerForSingleValueEvent(vListener);
+
     }
 
     private void setInitialData(){
@@ -103,6 +132,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         states.add(new search_output("Россия в 1918 году", "Михаил Зенкевич"));
         states.add(new search_output ("Еще одно забывчивое слово", "Афанасий Фет"));
         states.add(new search_output ("Афиши", "Николай Доризо"));
+        System.out.println(states);
 
     }
 
