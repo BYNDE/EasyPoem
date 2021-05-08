@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -14,6 +15,7 @@ import android.widget.SearchView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +27,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+
+
 public class search_activity extends AppCompatActivity implements search_output_item_adapter.OnNoteListener{
     ArrayList<search_output> states = new ArrayList<search_output>();
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,31 +106,25 @@ public class search_activity extends AppCompatActivity implements search_output_
     }
 
     private void firebase_poems_search(){
-      Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").equalTo("Шашки");
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-    System.out.print(query);
-    search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, this);
-        ValueEventListener vListener = new ValueEventListener() {
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("poems");
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (states.size()>0)states.clear();
-                if (snapshot.exists()){
-                    for (DataSnapshot ds : snapshot.getChildren()){
-                        search_output data = ds.getValue(search_output.class);
-                        states.add(data);
-                    }
-                    recyclerView.setAdapter(adapter);
-                }
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                search_output value = dataSnapshot.getValue(search_output.class);
+                Log.d("fff", "Value is: " + value.getAuthor());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                System.out.print("3kljg;lkdj");
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("fff", "Failed to read value.", error.toException());
             }
-        };
-        query.addListenerForSingleValueEvent(vListener);
-
+        });
     }
 
     private void setInitialData(){
