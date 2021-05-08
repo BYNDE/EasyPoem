@@ -128,11 +128,11 @@ public class search_activity extends AppCompatActivity implements search_output_
     }
 
     private void setInitialData(){
-
-        states.add(new search_output("Россия в 1918 году", "Михаил Зенкевич"));
-        states.add(new search_output ("Еще одно забывчивое слово", "Афанасий Фет"));
-        states.add(new search_output ("Афиши", "Николай Доризо"));
-        System.out.println(states);
+//
+//        states.add(new search_output("Россия в 1918 году", "Михаил Зенкевич"));
+//        states.add(new search_output ("Еще одно забывчивое слово", "Афанасий Фет"));
+//        states.add(new search_output ("Афиши", "Николай Доризо"));
+//        System.out.println(states);
 
     }
 
