@@ -3,6 +3,7 @@ package com.example.easypoem;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,6 +66,7 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
 
         //LL_Learn2
         BTN_send = findViewById(R.id.BTN_send);
+        BTN_send.setTag("ET");
         BTN_send.setOnClickListener(this);
 
         // LL_Start
@@ -100,8 +102,12 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
-        String temp = ET.getText().toString();
-        if (v.getTag().equals(word) || temp.equals(word)) {
+        Log.println(Log.DEBUG, "ET", v.getTag().toString());
+        if (v.getTag().toString().equals("ET")) {
+            v.setTag(ET.getText().toString());
+            Log.println(Log.DEBUG, "ET", "ddd");
+        }
+        if (v.getTag().toString().toLowerCase().equals(word.toLowerCase())) {
             phase++;
             if (phase < countPhase) {
                 mass[wordid] = word;
@@ -122,10 +128,13 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
                 LL_Learn.setVisibility(View.INVISIBLE);
                 LL_Learn2.setVisibility(View.INVISIBLE);
                 LL_Finish.setVisibility(View.VISIBLE);
-                T_title.setText("У вас" + waring + "ошибок.");
+                phase = 0;
+                mass[wordid] = word;
+                T_text.setText(String.join(" ", mass));
+                T_title.setText("У вас " + waring + " ошибок.");
             }
     } else {
-            if (countPhase < 10) {
+            if (LL_Learn.getVisibility() == View.VISIBLE) {
                 for (Button button : buttons) {
                     if (button.getTag().equals(v.getTag())) {
                         button.setText("Неправельно");
@@ -138,6 +147,7 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
             }
             waring++;
         }
+        BTN_send.setTag("ET");
     }
 
 
@@ -168,8 +178,8 @@ public class PoemLearn extends AppCompatActivity implements View.OnClickListener
             mass[wordid] = "____";
             ET.setHint("Ведите слово");
             ET.setText("");
-        }
 
+        }
         T_text.setText(String.join(" ", mass));
     }
 }
