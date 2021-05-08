@@ -35,7 +35,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         getSupportActionBar().hide();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(this, states, this);
+        search_output_item_adapter adapter = new search_output_item_adapter(this , android.R.layout.lis , states, this);
         states.clear();
         firebase_poems_search();
         recyclerView.setAdapter(adapter);
