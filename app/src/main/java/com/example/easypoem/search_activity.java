@@ -1,5 +1,7 @@
 package com.example.easypoem;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +15,12 @@ import android.widget.SearchView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -108,30 +112,22 @@ public class search_activity extends AppCompatActivity implements search_output_
 
     private void firebase_poems_search(String str){
         // Obtain the FirebaseAnalytics instance.
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        for (int i = 0; i < 1000; i++) {
-            DatabaseReference myRef = database.getReference("poems/" + i);
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    search_output value = dataSnapshot.getValue(search_output.class);
-                    value.text = value.author;
-                    value.author = "Author";
-                    if (str != "")
-                        if (value.title == str)
-                            states.add(value);
-                    else states.add(value);
-                }
+        Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                search_output value = dataSnapshot.getValue(search_output.class);
+                value.text = value.author;
+                value.author = "Author";
+                states.add(value);
+            }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w("fff", "Failed to read value.", error.toException());
-                }
-            });
-        }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                throw  error.toException();
+            }
+        });
     }
 
     private void setInitialData(){
