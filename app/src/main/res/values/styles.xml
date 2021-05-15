@@ -22,4 +22,8 @@
         <item name="elevation">0dp</item>
     </style>
 
+    <style name="StartTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/drawable</item>
+    </style>
+
 </resources>
