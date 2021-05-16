@@ -61,10 +61,6 @@ public class search_activity extends AppCompatActivity implements search_output_
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-                states.clear();
-                firebase_poems_search(query);
-                recyclerView.setAdapter(adapter);
-
                 return false;
             }
 
