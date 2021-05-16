@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -38,10 +40,9 @@ public class search_activity extends AppCompatActivity implements search_output_
 
         getSupportActionBar().hide();
 
+        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, search_activity.this);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        search_output_item_adapter adapter = new search_output_item_adapter(this, states, this);
-        states.clear();
-        firebase_poems_search("");
         recyclerView.setAdapter(adapter);
 
 
@@ -61,6 +62,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
+                adapter.notifyDataSetChanged();
                 return false;
             }
 
@@ -68,8 +70,7 @@ public class search_activity extends AppCompatActivity implements search_output_
             public boolean onQueryTextChange(final String newText) {
                 states.clear();
                 firebase_poems_search(newText);
-                recyclerView.setAdapter(adapter);
-
+                adapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -94,12 +95,12 @@ public class search_activity extends AppCompatActivity implements search_output_
             }
         });
     }
-    @Override
-    public void onBackPressed() {
-
-        back();
-
-    }
+//    @Override
+//    public void onBackPressed() {
+//
+//        back();
+//
+//    }
     public void back(){
         Intent intent = new Intent(search_activity.this,MainActivity.class);
         startActivity(intent);
