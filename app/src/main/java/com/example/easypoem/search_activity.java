@@ -112,14 +112,14 @@ public class search_activity extends AppCompatActivity implements search_output_
 
     private void firebase_poems_search(String str){
         // Obtain the FirebaseAnalytics instance.
-        if (str.lenght >= 3) {
-            Query query = FirebaseDatabase.getInstance().getReference("authors").orderByChild("name").startAt(str).endAt(str +"\uf8ff").limitToFirst(10);
+        if (str.length() >= 3) {
+            Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(10);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                        search_authors author = ds.getValue(search_authors.class);
-                        Log.println(Log.DEBUG, "Test", author.name);
+                        search_output value = ds.getValue(search_output.class);
+                        states.add(value);
                     }
                 }
 

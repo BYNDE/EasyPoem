@@ -41,8 +41,8 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
     @Override
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, PoemRead.class);
-        intent.putExtra("title", states.get(position).getTitle());
-        intent.putExtra("text", states.get(position).getText());
+        intent.putExtra("title", states.get(position).title);
+        intent.putExtra("text", states.get(position).text);
         startActivity(intent);
     }
 }

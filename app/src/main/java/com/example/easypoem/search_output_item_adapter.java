@@ -30,8 +30,8 @@ public class search_output_item_adapter  extends RecyclerView.Adapter<search_out
     @Override
     public void onBindViewHolder(search_output_item_adapter.ViewHolder holder, int position) {
         search_output state = states.get(position);
-        holder.titleView.setText(state.getTitle());
-        holder.authorView.setText(state.getAuthor());
+        holder.titleView.setText(state.title);
+        holder.authorView.setText(state.author);
 
     }
 
