@@ -6,83 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".PoemRead">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/orange"
+        android:gravity="center"
+        app:theme = '@style/Theme.MyApplication.ActionBar'>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
+
+            <ImageButton
+                android:id="@+id/BTN_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/orange"
+                app:tint = "@color/white"
+                app:srcCompat="@drawable/ic_button_back_24"
+                android:contentDescription="@string/imagebutton_back" />
+
+            <TextView
+                android:id="@+id/TV_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Название"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/TV_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Название"
-                android:textAlignment="center"
-                android:textColor="@color/orange"
-                android:textSize="30dp"/>
 
         <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_card"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp">
-
-
-        <TextView
-            android:id="@+id/TV_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/gray_hint"
-            android:gravity="center_horizontal"
-            android:text="Текст"
-            android:textSize="15dp"/>
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|top"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/border_card"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/TV_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="Текст"
+                        android:textColor="@color/gray_hint"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/BTN_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Продолжить"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/orange"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textAllCaps="false"
+                    android:textSize="18dp"
+                    android:textAlignment="center"
+                    />
+
+            </LinearLayout>
 
         </ScrollView>
 
-    </LinearLayout>
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/BTN_back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Вернуться"
-            android:textSize="18dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/orange"
-            android:textAlignment="center"/>
-
-        <Button
-            android:id="@+id/BTN_next"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Продолжить"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/orange"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginStart="5dp"
-            android:textAllCaps="false"
-            android:textSize="18dp"
-            android:textAlignment="center"/>
 
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

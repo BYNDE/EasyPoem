@@ -62,15 +62,12 @@ public class search_activity extends AppCompatActivity implements search_output_
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String query) {
-                adapter.notifyDataSetChanged();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(final String newText) {
-                states.clear();
-                firebase_poems_search(newText);
-                adapter.notifyDataSetChanged();
+                search(newText,adapter);
                 return true;
             }
         });
@@ -95,22 +92,28 @@ public class search_activity extends AppCompatActivity implements search_output_
             }
         });
     }
-//    @Override
-//    public void onBackPressed() {
-//
-//        back();
-//
-//    }
+    @Override
+    public void onBackPressed() {
+
+        back();
+
+    }
     public void back(){
         Intent intent = new Intent(search_activity.this,MainActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
 
+    public void search(String newText,search_output_item_adapter adapter){
+        firebase_poems_search(newText);
+        adapter.notifyDataSetChanged();
+    }
+
     private void firebase_poems_search(String str){
+        states.clear();
         // Obtain the FirebaseAnalytics instance.
         if (str.length() >= 3) {
-            Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(10);
+            Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(5);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
