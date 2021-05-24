@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,10 @@ public class MyDbManager {
     public MyDbManager(Context context){
         this.context = context;
         myDbHelper = new MyDbHelper(context);
+    }
+
+    public void deleteFromDb(String title,String author){
+        db.delete(MyConstant.TABLE_NAME,"title = ? and author = ?",new String[] {title,author});
     }
 
     public void openDb(){
@@ -49,6 +54,17 @@ public class MyDbManager {
         }
         cursor.close();
         return mass;
+    }
+
+    public boolean check_availability(String title,String author){
+        Cursor cursor = db.query(MyConstant.TABLE_NAME,null,"title = ? and author = ?",new String[] {title,author},null,
+                null, null);
+        if (cursor.getCount() == 0) {
+            return  false;
+        }
+        else {
+            return true;
+        }
     }
     public void closeDb(){
         myDbHelper.close();

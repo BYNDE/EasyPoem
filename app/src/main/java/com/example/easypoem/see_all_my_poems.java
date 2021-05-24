@@ -25,7 +25,6 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         myDbManager.openDb();
         String [][] mass = myDbManager.getFromDb();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        String[] mass_text =new String[mass.length];
         if (mass.length>0){
             for (int i = 0; i < mass.length; i++) {
                 states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
@@ -43,6 +42,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         Intent intent = new Intent(this, PoemRead.class);
         intent.putExtra("title", states.get(position).title);
         intent.putExtra("text", states.get(position).text);
+        intent.putExtra("author", states.get(position).author);
         startActivity(intent);
     }
 }

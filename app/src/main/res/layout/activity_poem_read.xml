@@ -43,7 +43,8 @@
                 android:text="Название"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
+
 
         </LinearLayout>
 
@@ -54,6 +55,7 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:orientation="vertical">
 
 
@@ -62,51 +64,111 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal|top"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="top"
+                    android:gravity="bottom|center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/border_card"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Название"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_hint"
+                        android:textSize="20dp"/>
+
+
                     <TextView
                         android:id="@+id/TV_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
                         android:text="Текст"
                         android:textColor="@color/gray_hint"
                         android:textSize="15dp" />
 
-                </LinearLayout>
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_hint"
+                        android:layout_marginTop="30dp" />
 
-                <Button
-                    android:id="@+id/BTN_next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Продолжить"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/orange"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginStart="5dp"
-                    android:textAllCaps="false"
-                    android:textSize="18dp"
-                    android:textAlignment="center"
-                    />
+                    <TextView
+                        android:id="@+id/TV_author"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:text="Автор"
+                        android:textColor="@color/gray_hint"
+                        android:textSize="15dp" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </ScrollView>
-
-
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BTN_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_button_add_24"
+                android:backgroundTint="@color/orange"
+                android:text="Добавить"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="2dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/BTN_learn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/ic_button_study_24"
+                android:layout_weight="1"
+                android:text="Изучать"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/orange"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

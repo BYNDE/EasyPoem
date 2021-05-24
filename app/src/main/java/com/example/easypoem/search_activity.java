@@ -146,6 +146,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         Intent intent = new Intent(this, PoemRead.class);
         intent.putExtra("title", states.get(position).title);
         intent.putExtra("text", states.get(position).text);
+        intent.putExtra("author", states.get(position).author);
         startActivity(intent);
     }
 }
