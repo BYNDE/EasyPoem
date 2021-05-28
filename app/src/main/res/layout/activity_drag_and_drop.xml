@@ -15,6 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/word"
         android:layout_width="wrap_content"
@@ -28,5 +29,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+=======
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:justifyContent="flex_start"
+        app:flexDirection="row"
+        app:alignItems="flex_start"
+        app:alignContent="flex_start"
+        app:flexWrap="wrap"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="d"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fsdfsdfd"
+            android:gravity="center"
+            android:background="@drawable/border_word"
+            android:textSize="20sp"
+            />
+
+    </com.google.android.flexbox.FlexboxLayout>
+>>>>>>> 4111ab12c615ff077194961148bc2ddb293d5ddb
 
 </androidx.constraintlayout.widget.ConstraintLayout>
