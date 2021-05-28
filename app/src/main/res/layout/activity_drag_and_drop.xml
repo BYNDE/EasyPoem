@@ -15,18 +15,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <TextView
-        android:id="@+id/word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="         "
-        android:gravity="center"
-        android:background="@drawable/border_word"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/words_recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.wefika.flowlayout.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_word"
+                android:gravity="center"
+                android:text="         "
+                android:textSize="20sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fsdfsdfd"
+                android:gravity="center"
+                android:background="@drawable/border_word"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fsdfsdfd"
+                android:gravity="center"
+                android:background="@drawable/border_word"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fsdfsdfd"
+                android:gravity="center"
+                android:background="@drawable/border_word"
+                android:textSize="20sp"
+                />
+
+    </com.wefika.flowlayout.FlowLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
