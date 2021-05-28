@@ -3,16 +3,17 @@
     package="com.example.easypoem">
 
     <application
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:allowBackup="true"
-        android:screenOrientation="portrait"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPoem">
-        <activity android:name=".Login_or_register"></activity>
+        <activity android:name=".drag_and_drop"></activity>
+        <activity android:name=".Login_or_register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".see_all_my_poems" />
         <activity android:name=".PoemLearn" />
@@ -22,7 +23,7 @@
         <activity
             android:name=".start_activity"
             android:label="@string/app_name"
-            android:theme="@style/StartTheme">>
+            android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
