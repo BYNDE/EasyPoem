@@ -15,7 +15,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-<<<<<<< HEAD
     <TextView
         android:id="@+id/word"
         android:layout_width="wrap_content"
@@ -29,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-=======
+
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -129,6 +128,5 @@
             />
 
     </com.google.android.flexbox.FlexboxLayout>
->>>>>>> 4111ab12c615ff077194961148bc2ddb293d5ddb
 
 </androidx.constraintlayout.widget.ConstraintLayout>

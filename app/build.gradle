@@ -46,15 +46,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:18.0.3'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'androidx.annotation:annotation:1.1.0'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
->>>>>>> parent of 691b9b8 (d)
-=======
-    implementation 'com.google.android.flexbox:flexbox:3.0.0'
-    implementation 'com.google.android:flexbox:0.1.2'
->>>>>>> 4111ab12c615ff077194961148bc2ddb293d5ddb
+
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

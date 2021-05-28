@@ -23,16 +23,8 @@
         <activity
             android:name=".start_activity"
             android:label="@string/app_name"
-<<<<<<< HEAD
-<<<<<<< HEAD
-            android:theme="@style/StartTheme">>
-=======
+
             android:theme="@style/StartTheme">
-            >
->>>>>>> parent of 691b9b8 (d)
-=======
-            android:theme="@style/StartTheme">
->>>>>>> 4111ab12c615ff077194961148bc2ddb293d5ddb
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
