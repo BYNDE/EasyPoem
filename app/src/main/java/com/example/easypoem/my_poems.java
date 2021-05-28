@@ -53,7 +53,7 @@ public class my_poems extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),drag_and_drop.class);
+                Intent intent = new Intent(getActivity(),add_my_poem.class);
                 startActivity(intent);
             }
         });
