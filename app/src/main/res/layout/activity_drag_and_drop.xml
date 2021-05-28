@@ -15,118 +15,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <TextView
-        android:id="@+id/word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="         "
-        android:gravity="center"
-        android:background="@drawable/border_word"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/words_recycler"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.flexbox.FlexboxLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:justifyContent="flex_start"
-        app:flexDirection="row"
-        app:alignItems="flex_start"
-        app:alignContent="flex_start"
-        app:flexWrap="wrap"
-        >
+        android:layout_marginBottom="190dp"
+        app:layout_constraintBottom_toTopOf="@+id/words_recycler"
+        tools:layout_editor_absoluteX="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="d"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flex_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:alignContent="flex_start"
+            app:alignItems="flex_start"
+            app:flexDirection="row"
+            app:flexWrap="wrap"
+            app:justifyContent="flex_start">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
+        </com.google.android.flexbox.FlexboxLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fsdfsdfd"
-            android:gravity="center"
-            android:background="@drawable/border_word"
-            android:textSize="20sp"
-            />
-
-    </com.google.android.flexbox.FlexboxLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
