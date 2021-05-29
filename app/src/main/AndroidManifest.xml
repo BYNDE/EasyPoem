@@ -12,7 +12,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPoem">
-        <activity android:name=".drag_and_drop"></activity>
+        <activity android:name=".drag_and_drop" />
         <activity android:name=".Login_or_register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".see_all_my_poems" />
