@@ -129,8 +129,8 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
         boolean word_correct = false;
         @Override
         public boolean onDrag(View v, DragEvent event) {
-            int drag_ivent = event.getAction();
-            switch (drag_ivent){
+            int drag_event = event.getAction();
+            switch (drag_event){
                 case DragEvent.ACTION_DRAG_ENTERED:
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
