@@ -10,31 +10,31 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/orange"
         android:gravity="center"
-        app:theme = '@style/Theme.MyApplication.ActionBar'>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:theme='@style/Theme.MyApplication.ActionBar'>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:theme="@style/Theme.Design.Light.NoActionBar">
 
             <ImageButton
                 android:id="@+id/BTN_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="5dp"
                 android:background="@color/orange"
-                app:tint = "@color/white"
+                android:contentDescription="@string/imagebutton_back"
                 app:srcCompat="@drawable/ic_button_back_24"
-                android:contentDescription="@string/imagebutton_back" />
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/TV_title"
@@ -43,7 +43,7 @@
                 android:text="Название"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
