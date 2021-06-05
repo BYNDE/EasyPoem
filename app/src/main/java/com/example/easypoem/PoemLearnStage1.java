@@ -57,7 +57,7 @@ public class PoemLearnStage1 extends AppCompatActivity {
         findViewById(R.id.BTN_check).setOnClickListener(v -> {
             if (recyclerAdapter.moviesList.equals(Arrays.asList(text.lines))) {
                 Toast.makeText(getApplicationContext(), "true", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, PoemLearn.class);
+                Intent intent = new Intent(this, PoemLearnStage2.class);
                 intent.putExtra("text", getIntent().getExtras().getString("text"));
                 intent.putExtra("title", getIntent().getExtras().getString("title"));
                 startActivity(intent);
@@ -70,6 +70,9 @@ public class PoemLearnStage1 extends AppCompatActivity {
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START  | ItemTouchHelper.END, 0) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+
+            if (movelist.get(viewHolder.getAdapterPosition()).equals(""))
+                return false;
 
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();
