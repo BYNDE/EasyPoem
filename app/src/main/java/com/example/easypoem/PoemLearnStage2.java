@@ -1,5 +1,8 @@
 package com.example.easypoem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.ClipData;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,9 +10,6 @@ import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easypoem.learn.Text;
 import com.google.android.flexbox.AlignItems;
@@ -20,8 +20,9 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
-public class drag_and_drop extends AppCompatActivity implements word_item_adapter.OnLongClickItem{
+public class PoemLearnStage2 extends AppCompatActivity implements word_item_adapter.OnLongClickItem{
     TextView word_textview;
     String word_entered_text;
     RecyclerView words_recycler;
@@ -31,45 +32,15 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
 
     FlexboxLayout flexboxLayout;
 
-     String defText = "— Скажи-ка, дядя, ведь не даром\n" +
-            "Москва, спаленная пожаром,\n" +
-            "Французу отдана?\n" +
-            "Ведь были ж схватки боевые,\n" +
-            "Да, говорят, еще какие!\n" +
-            "Недаром помнит вся Россия\n" +
-            "Про день Бородина!\n" +
-            "\n" +
-            "— Да, были люди в наше время,\n" +
-            "Не то, что нынешнее племя:\n" +
-            "Богатыри — не вы!\n" +
-            "Плохая им досталась доля:\n" +
-            "Немногие вернулись с поля…\n" +
-            "Не будь на то господня воля,\n" +
-            "Не отдали б Москвы!\n" +
-            "\n" +
-            "Мы долго молча отступали,\n" +
-            "Досадно было, боя ждали,\n" +
-            "Ворчали старики:\n" +
-            "«Что ж мы? на зимние квартиры?\n" +
-            "Не смеют, что ли, командиры\n" +
-            "Чужие изорвать мундиры\n" +
-            "О русские штыки?»\n" +
-            "\n" +
-            "И вот нашли большое поле:\n" +
-            "Есть разгуляться где на воле!\n" +
-            "Построили редут.\n" +
-            "У наших ушки на макушке!\n" +
-            "Чуть утро осветило пушки\n" +
-            "И леса синие верхушки —\n";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_drag_and_drop);
         words_recycler = findViewById(R.id.words_recycler);
         flexboxLayout = findViewById(R.id.flex_layout);
 
-        Text text = new Text(defText);
+        Text text = new Text(getIntent().getExtras().getString("text"));
 
         int selectidWord = text.randomWord();
         text.selectWord(selectidWord);
@@ -78,13 +49,13 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
                 TextView textView = new TextView(this);
                 textView.setText(text.words[i]);
                 textView.setGravity(Gravity.CENTER);
-                textView.setTextSize(20);
+                textView.setTextSize(25);
                 flexboxLayout.addView(textView);
             } else {
                 TextView textView = new TextView(this);
-                textView.setText("         ");
+                textView.setText("_______");
                 textView.setGravity(Gravity.CENTER);
-                textView.setTextSize(20);
+                textView.setTextSize(25);
                 textView.setBackground(Drawable.createFromPath("@drawable/border_word"));
                 textView.setId(R.id.word);
                 flexboxLayout.addView(textView);
@@ -101,7 +72,7 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
         words.add(text.words[text.randomWord()]);
         Collections.shuffle(words);
 
-        adapter = new word_item_adapter(this, words,drag_and_drop.this);
+        adapter = new word_item_adapter(this, words,this);
         words_recycler.setLayoutManager(manager);
 
         words_recycler.setAdapter(adapter);
@@ -113,14 +84,12 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
 
     @Override
     public void onLongClickItem(View view,String word) {
-            ClipData clipData = ClipData.newPlainText("","");
-            View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
-            view.startDrag(clipData,myShadowBuilder,view,0);
-            view.setVisibility(View.INVISIBLE);
-            entered_word = view;
-            word_entered_text = word;
-
-
+        ClipData clipData = ClipData.newPlainText("","");
+        View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
+        view.startDrag(clipData,myShadowBuilder,view,0);
+        view.setVisibility(View.INVISIBLE);
+        entered_word = view;
+        word_entered_text = word;
     }
 
 
@@ -132,10 +101,12 @@ public class drag_and_drop extends AppCompatActivity implements word_item_adapte
             int drag_event = event.getAction();
             switch (drag_event){
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    break;
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
+                    if (!word_textview.getText().toString().equals("_______")) {
+                        words.add(word_textview.getText().toString()); 
+                    }
                     word_textview.setText(word_entered_text);
                     word_correct = true;
                     break;
