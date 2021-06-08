@@ -25,7 +25,6 @@ public class record_activity extends AppCompatActivity implements View.OnClickLi
     private static final int PERMISSION_CODE = 1;
     private boolean is_recording = false;
     private ImageButton record_button,record_again_button,correct_button;
-    private LinearLayout layout;
     private MediaRecorder mediaRecorder;
     private Chronometer record_timer;
     private String record_file;
@@ -40,7 +39,6 @@ public class record_activity extends AppCompatActivity implements View.OnClickLi
         record_button = findViewById(R.id.start_or_stop_recording);
         record_again_button = findViewById(R.id.record_again);
         correct_button = findViewById(R.id.correct);
-        layout = findViewById(R.id.layout);
         TextView tv_text = findViewById(R.id.TV_text);
 
 
@@ -97,7 +95,8 @@ public class record_activity extends AppCompatActivity implements View.OnClickLi
                 if(is_recording){
                     stopRecording();
                     record_button.setVisibility(View.INVISIBLE);
-                    layout.setVisibility(View.VISIBLE);
+                    record_again_button.setVisibility(View.VISIBLE);
+                    correct_button.setVisibility(View.VISIBLE);
                     is_recording = !is_recording;
                 }
                 else{
@@ -111,7 +110,8 @@ public class record_activity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.record_again:
                 startRecording();
-                layout.setVisibility(View.INVISIBLE);
+                record_again_button.setVisibility(View.INVISIBLE);
+                correct_button.setVisibility(View.INVISIBLE);
                 record_button.setVisibility(View.VISIBLE);
                 is_recording = !is_recording;
             break;

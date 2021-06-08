@@ -74,7 +74,18 @@ public class my_poems extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),add_my_poem.class);
+                Intent intent = new Intent(getActivity(),record_activity.class);
+                startActivity(intent);
+            }
+        });
+
+        last_poem_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),PoemRead.class);
+                intent.putExtra("title", last_poem_mass[0]);
+                intent.putExtra("author", last_poem_mass[1]);
+                intent.putExtra("text", last_poem_mass[2]);
                 startActivity(intent);
             }
         });

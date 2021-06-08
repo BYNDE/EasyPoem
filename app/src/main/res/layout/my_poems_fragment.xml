@@ -165,6 +165,8 @@
                 android:id="@+id/last_poem_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
                 android:visibility="invisible"
                 android:background="@drawable/border_card"
                 android:orientation="vertical">

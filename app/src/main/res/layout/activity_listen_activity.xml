@@ -52,14 +52,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_horizontal"
+        android:background="@color/orange"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:tint="@color/orange"
+            android:background="@color/orange"
+            android:tint="@color/white"
             style="?android:attr/borderlessButtonStyle"
             app:srcCompat="@drawable/ic_button_play_40" />
 
@@ -67,8 +68,8 @@
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:thumbTint="@color/orange"
-            android:progressTint="@color/orange"/>
+            android:thumbTint="@color/white"
+            android:progressTint="@color/white"/>
 
     </LinearLayout>
 

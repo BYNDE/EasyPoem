@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical"
-        android:layout_marginBottom="110dp"
+        android:layout_marginBottom="85dp"
         android:layout_marginTop="10dp">
 
 
@@ -25,6 +25,17 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|top"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Прочитайте стихотворение вслух"
+                    android:textColor="@color/orange"
+                    android:textSize="30sp" />
 
 
                 <TextView
@@ -49,42 +60,28 @@
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:textColor="@color/orange"
-        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:background="@color/orange"
+        android:textSize="35sp"
         app:layout_constraintBottom_toTopOf="@+id/layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
 
-    <ImageButton
-        android:id="@+id/start_or_stop_recording"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:backgroundTint="@color/white"
-        app:tint = "@color/orange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/fab_add"
-        style="?android:attr/borderlessButtonStyle"
-        android:src="@drawable/ic_button_record_40" />
 
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center"
+        android:background="@color/orange"
         android:orientation="horizontal">
 
         <ImageButton
@@ -93,14 +90,14 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            app:background="@drawable/toolbar_form"
-            app:tint = "@color/orange"
+            app:background="@color/orange"
+            app:tint = "@color/white"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
             android:contentDescription="@string/fab_add"
+            android:visibility="invisible"
             style="?android:attr/borderlessButtonStyle"
             android:src="@drawable/ic_button_record_40" />
 
@@ -110,19 +107,34 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            app:background="@drawable/toolbar_form"
-            app:tint = "@color/orange"
+            app:background="@color/orange"
+            app:tint = "@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="5dp"
             android:layout_marginStart="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:contentDescription="@string/fab_add"
             style="?android:attr/borderlessButtonStyle"
             android:src="@drawable/ic_done_40" />
 
     </LinearLayout>
+    <ImageButton
+        android:id="@+id/start_or_stop_recording"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/orange"
+        app:tint = "@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/fab_add"
+        style="?android:attr/borderlessButtonStyle"
+        android:src="@drawable/ic_button_record_40" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
