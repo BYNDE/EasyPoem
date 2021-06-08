@@ -28,6 +28,7 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listen_activity);
+        getSupportActionBar().hide();
 
         String path = this.getExternalFilesDir("/").getAbsolutePath();
         file = new File(path+"/filename.3gp");
@@ -37,7 +38,47 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
 
         play_button.setOnClickListener(this);
 
+        TextView tv_text = findViewById(R.id.TV_text);
 
+        tv_text.setText("— Скажи-ка, дядя, ведь не даром\n" +
+                "Москва, спаленная пожаром,\n" +
+                "Французу отдана?\n" +
+                "Ведь были ж схватки боевые,\n" +
+                "Да, говорят, еще какие!\n" +
+                "Недаром помнит вся Россия\n" +
+                "Про день Бородина!\n" +
+                "\n" +
+                "— Да, были люди в наше время,\n" +
+                "Не то, что нынешнее племя:\n" +
+                "Богатыри — не вы!\n" +
+                "Плохая им досталась доля:\n" +
+                "Немногие вернулись с поля…\n" +
+                "Не будь на то господня воля,\n" +
+                "Не отдали б Москвы!\n" +
+                "\n" +
+                "Мы долго молча отступали,\n" +
+                "Досадно было, боя ждали,\n" +
+                "Ворчали старики:\n" +
+                "«Что ж мы? на зимние квартиры?\n" +
+                "Не смеют, что ли, командиры\n" +
+                "Чужие изорвать мундиры\n" +
+                "О русские штыки?»\n" +
+                "\n" +
+                "И вот нашли большое поле:\n" +
+                "Есть разгуляться где на воле!\n" +
+                "Построили редут.\n" +
+                "У наших ушки на макушке!\n" +
+                "Чуть утро осветило пушки\n" +
+                "И леса синие верхушки —\n" +
+                "Французы тут как тут.\n" +
+                "\n" +
+                "Забил заряд я в пушку туго\n" +
+                "И думал: угощу я друга!\n" +
+                "Постой-ка, брат мусью!\n" +
+                "Что тут хитрить, пожалуй к бою;\n" +
+                "Уж мы пойдем ломить стеною,\n" +
+                "Уж постоим мы головою\n" +
+                "За родину свою!\n");
     }
 
     @Override
@@ -77,6 +118,7 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
 
     public void playAudio(){
         mediaPlayer = new MediaPlayer();
+        mediaPlayer.setVolume(50,100);
         try {
             mediaPlayer.setDataSource(file.getAbsolutePath());
             mediaPlayer.prepare();

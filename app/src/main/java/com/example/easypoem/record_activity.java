@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -33,11 +34,57 @@ public class record_activity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_activity);
+        getSupportActionBar().hide();
+
         record_timer = findViewById(R.id.chronometer);
         record_button = findViewById(R.id.start_or_stop_recording);
         record_again_button = findViewById(R.id.record_again);
         correct_button = findViewById(R.id.correct);
         layout = findViewById(R.id.layout);
+        TextView tv_text = findViewById(R.id.TV_text);
+
+
+        tv_text.setText("— Скажи-ка, дядя, ведь не даром\n" +
+                "Москва, спаленная пожаром,\n" +
+                "Французу отдана?\n" +
+                "Ведь были ж схватки боевые,\n" +
+                "Да, говорят, еще какие!\n" +
+                "Недаром помнит вся Россия\n" +
+                "Про день Бородина!\n" +
+                "\n" +
+                "— Да, были люди в наше время,\n" +
+                "Не то, что нынешнее племя:\n" +
+                "Богатыри — не вы!\n" +
+                "Плохая им досталась доля:\n" +
+                "Немногие вернулись с поля…\n" +
+                "Не будь на то господня воля,\n" +
+                "Не отдали б Москвы!\n" +
+                "\n" +
+                "Мы долго молча отступали,\n" +
+                "Досадно было, боя ждали,\n" +
+                "Ворчали старики:\n" +
+                "«Что ж мы? на зимние квартиры?\n" +
+                "Не смеют, что ли, командиры\n" +
+                "Чужие изорвать мундиры\n" +
+                "О русские штыки?»\n" +
+                "\n" +
+                "И вот нашли большое поле:\n" +
+                "Есть разгуляться где на воле!\n" +
+                "Построили редут.\n" +
+                "У наших ушки на макушке!\n" +
+                "Чуть утро осветило пушки\n" +
+                "И леса синие верхушки —\n" +
+                "Французы тут как тут.\n" +
+                "\n" +
+                "Забил заряд я в пушку туго\n" +
+                "И думал: угощу я друга!\n" +
+                "Постой-ка, брат мусью!\n" +
+                "Что тут хитрить, пожалуй к бою;\n" +
+                "Уж мы пойдем ломить стеною,\n" +
+                "Уж постоим мы головою\n" +
+                "За родину свою!\n");
+
+
         record_button.setOnClickListener(this);
         record_again_button.setOnClickListener(this);
         correct_button.setOnClickListener(this);

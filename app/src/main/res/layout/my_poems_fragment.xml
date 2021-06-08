@@ -162,7 +162,7 @@
             android:layout_marginEnd="10dp">
 
             <LinearLayout
-                android:id="@+id/poems_layout"
+                android:id="@+id/last_poem_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
@@ -177,25 +177,23 @@
                     android:src="@drawable/ic_button_new_poem_24" />
 
                 <TextView
-                    android:id="@+id/first_poem"
+                    android:id="@+id/last_poem"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.0"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="Я вас любил..."
+                    android:text="Название стихотворения"
                     android:textColor="@color/gray_hint"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/first_author"
+                <TextView
+                    android:id="@+id/last_author"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_weight="1.0"
+                    android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="A.C.Пушкин"
+                    android:text="Автор"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/gray_hint_light"
-                    android:textSize="12sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 

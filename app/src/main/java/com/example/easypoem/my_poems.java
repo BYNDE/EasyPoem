@@ -18,13 +18,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.easypoem.sqlite.MyDbManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class my_poems extends Fragment {
 
     private MyPoemsViewModel mViewModel;
     private boolean clicked = false;
+    private MyDbManager myDbManager;
+    private String [] last_poem_mass;
+    private FloatingActionButton button_add;
+    private Button see_all_poems_button;
+    private TextView last_poem_title_tv,last_poem_author_tv;
+    private LinearLayout add_poem_layout,last_poem_layout;
 
     public static my_poems newInstance() {
         return new my_poems();
@@ -34,11 +42,24 @@ public class my_poems extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.my_poems_fragment, container, false);
+        check_added();
 
 
-        FloatingActionButton button_add = view.findViewById(R.id.fab_add);
+        button_add = view.findViewById(R.id.fab_add);
+        see_all_poems_button = view.findViewById(R.id.see_all_poems);
+        last_poem_author_tv = view.findViewById(R.id.last_author);
+        last_poem_title_tv = view.findViewById(R.id.last_poem);
+        add_poem_layout = view.findViewById(R.id.add_poem_layout);
+        last_poem_layout = view.findViewById(R.id.last_poem_layout);
 
-        Button see_all_poems_button = view.findViewById(R.id.see_all_poems);
+        myDbManager = new MyDbManager(getActivity());
+        myDbManager.openDb();
+        if (myDbManager.getLast() != null){
+            last_poem_mass = myDbManager.getLast();
+            setLastPoem();
+        }
+        myDbManager.closeDb();
+
 
 
         see_all_poems_button.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +74,23 @@ public class my_poems extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),record_activity.class);
+                Intent intent = new Intent(getActivity(),add_my_poem.class);
                 startActivity(intent);
             }
         });
 
         return view;
+    }
+
+    private void setLastPoem() {
+        last_poem_title_tv.setText(last_poem_mass[0]);
+        last_poem_author_tv.setText(last_poem_mass[1]);
+        add_poem_layout.setVisibility(View.INVISIBLE);
+        last_poem_layout.setVisibility(View.VISIBLE);
+    }
+
+    private void check_added() {
+
     }
 
     @Override

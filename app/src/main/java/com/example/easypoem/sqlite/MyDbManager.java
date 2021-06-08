@@ -56,13 +56,38 @@ public class MyDbManager {
         return mass;
     }
 
+    public String[] getLast(){
+        String[] mass = new String[4];
+        Cursor cursor = db.query(MyConstant.TABLE_NAME, null, null, null, null, null, MyConstant._ID +" DESC", "1");
+
+        if (cursor.getCount() == 0) {
+            cursor.close();
+            return  null;
+        }
+        else {
+            while(cursor.moveToNext()){
+                String title = cursor.getString(cursor.getColumnIndex(MyConstant.TITLE));
+                String author = cursor.getString(cursor.getColumnIndex(MyConstant.AUTHOR));
+                String text = cursor.getString(cursor.getColumnIndex(MyConstant.TEXT));
+                mass[0] = title;
+                mass[1] = author;
+                mass[2] = text;
+                mass[3] = "3";
+            }
+            cursor.close();
+            return mass;
+        }
+    }
+
     public boolean check_availability(String title,String author){
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,"title = ? and author = ?",new String[] {title,author},null,
                 null, null);
         if (cursor.getCount() == 0) {
+            cursor.close();
             return  false;
         }
         else {
+            cursor.close();
             return true;
         }
     }

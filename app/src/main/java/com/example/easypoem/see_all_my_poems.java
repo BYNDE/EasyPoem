@@ -30,6 +30,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                 states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
             }
         }
+        myDbManager.closeDb();
 
         search_output_item_adapter adapter = new search_output_item_adapter(see_all_my_poems.this, states, this);
 
