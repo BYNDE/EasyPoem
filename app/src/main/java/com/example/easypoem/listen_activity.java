@@ -172,7 +172,7 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
             @Override
             public void run() {
                 seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                seekBarHandler.postDelayed(this,500);
+                seekBarHandler.postDelayed(this,0);
             }
         };
     }
