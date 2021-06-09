@@ -71,8 +71,12 @@ public class PoemLearnStage1 extends AppCompatActivity {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
 
-            if (movelist.get(viewHolder.getAdapterPosition()).equals(""))
+            if (movelist.get(viewHolder.getAdapterPosition()).equals(" "))
                 return false;
+
+            if (movelist.get(target.getAdapterPosition()).equals(" "))
+                return false;
+
 
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();

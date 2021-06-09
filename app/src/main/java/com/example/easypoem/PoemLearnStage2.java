@@ -10,6 +10,7 @@ import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.easypoem.learn.Text;
 import com.google.android.flexbox.AlignItems;
@@ -28,8 +29,9 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
     RecyclerView words_recycler;
     word_item_adapter adapter;
     View entered_word;
+    Text text;
     ArrayList<String> words = new ArrayList<>();
-
+    TextView selectTextView;
     FlexboxLayout flexboxLayout;
 
     @Override
@@ -39,38 +41,14 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         setContentView(R.layout.activity_drag_and_drop);
         words_recycler = findViewById(R.id.words_recycler);
         flexboxLayout = findViewById(R.id.flex_layout);
-
-        Text text = new Text(getIntent().getExtras().getString("text"));
-
-        int selectidWord = text.randomWord();
-        text.selectWord(selectidWord);
-        for (int i = 0; i < text.words.length; i++) {
-            if (i != selectidWord) {
-                TextView textView = new TextView(this);
-                textView.setText(text.words[i]);
-                textView.setGravity(Gravity.CENTER);
-                textView.setTextSize(25);
-                flexboxLayout.addView(textView);
-            } else {
-                TextView textView = new TextView(this);
-                textView.setText("_______");
-                textView.setGravity(Gravity.CENTER);
-                textView.setTextSize(25);
-                textView.setBackground(Drawable.createFromPath("@drawable/border_word"));
-                textView.setId(R.id.word);
-                flexboxLayout.addView(textView);
-            }
-        }
+        text = new Text(getIntent().getExtras().getString("text"));
 
         FlexboxLayoutManager manager = new FlexboxLayoutManager(this);
         manager.setFlexDirection(FlexDirection.ROW);
         manager.setJustifyContent(JustifyContent.CENTER);
         manager.setAlignItems(AlignItems.CENTER);
 
-        words.add(text.selectedWord);
-        words.add(text.words[text.randomWord()]);
-        words.add(text.words[text.randomWord()]);
-        Collections.shuffle(words);
+        selectword();
 
         adapter = new word_item_adapter(this, words,this);
         words_recycler.setLayoutManager(manager);
@@ -92,7 +70,34 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         word_entered_text = word;
     }
 
+    public void selectword() {
+        flexboxLayout.removeAllViews();
+        words.clear();
+        int selectidWord = text.randomWord();
+        text.selectWord(selectidWord);
+        for (int i = 0; i < text.words.length; i++) {
+            if (i != selectidWord) {
+                TextView textView = new TextView(this);
+                textView.setText(text.words[i]);
+                textView.setGravity(Gravity.CENTER);
+                textView.setTextSize(25);
+                flexboxLayout.addView(textView);
+            } else {
+                selectTextView = new TextView(this);
+                selectTextView.setText("_______");
+                selectTextView.setGravity(Gravity.CENTER);
+                selectTextView.setTextSize(25);
+                selectTextView.setBackground(getDrawable(R.drawable.border_word));
+                selectTextView.setId(R.id.word);
+                flexboxLayout.addView(selectTextView);
+            }
+        }
 
+        words.add(text.selectedWord);
+        words.add(text.words[text.randomWord()]);
+        words.add(text.words[text.randomWord()]);
+        Collections.shuffle(words);
+    }
 
     View.OnDragListener dragListener = new View.OnDragListener() {
         boolean word_correct = false;
@@ -104,7 +109,11 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-                    if (!word_textview.getText().toString().equals("_______")) {
+                    if (word_textview.getText().toString().equals(text.selectedWord)) {
+                        selectword();
+                        Toast.makeText(getApplicationContext(), "true", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (!word_textview.getText().toString().equals("_______")) {
                         words.add(word_textview.getText().toString()); 
                     }
                     word_textview.setText(word_entered_text);
