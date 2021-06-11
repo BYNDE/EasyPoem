@@ -6,12 +6,14 @@ public class MyConstant {
     public static final String TITLE = "title";
     public static final String AUTHOR = "author";
     public static final String TEXT = "text";
+    public static final String ADDED_OR_CREATED = "added_or_created";
+    public static final String LEARNED = "learned";
     public static final String DB_NAME = "users_poems.db";
     public static final int VERSION = 1;
 
     public static  final String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS "+
             TABLE_NAME+" ("+_ID+" INTEGER PRIMARY KEY,"+TITLE+" TEXT,"+AUTHOR+" TEXT,"+
-            TEXT+" TEXT)";
+            TEXT+" TEXT," + ADDED_OR_CREATED+" INTEGER," + LEARNED+" INTEGER)";
     public static final String TABLE_DROP = "DROP TABLE IF EXISTS "+TABLE_NAME;
 
 }

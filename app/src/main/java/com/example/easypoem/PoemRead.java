@@ -78,7 +78,7 @@ public class PoemRead extends AppCompatActivity {
             else{
                 myDbManager.insertToDb(getIntent().getExtras().getString("title"),
                         getIntent().getExtras().getString("author"),
-                        getIntent().getExtras().getString("text"));
+                        getIntent().getExtras().getString("text"),0);
             }
             if_added = !if_added;
             change_add_button(btn_add);

@@ -118,7 +118,7 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
 
     public void playAudio(){
         mediaPlayer = new MediaPlayer();
-        mediaPlayer.setVolume(50,100);
+        mediaPlayer.setVolume(1.0f,1.0f);
         try {
             mediaPlayer.setDataSource(file.getAbsolutePath());
             mediaPlayer.prepare();

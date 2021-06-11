@@ -31,7 +31,7 @@ public class add_my_poem extends AppCompatActivity {
                 String title = edit_title.getText().toString();
                 String author = edit_author.getText().toString();
                 String text = edit_text.getText().toString();
-                myDbManager.insertToDb(title,author,text);
+                myDbManager.insertToDb(title,author,text,1);
 
                 Intent intent = new Intent(add_my_poem.this, MainActivity.class);
                 startActivity(intent);
