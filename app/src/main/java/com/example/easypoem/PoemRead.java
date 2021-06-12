@@ -60,8 +60,8 @@ public class PoemRead extends AppCompatActivity {
         T_author.setText(getIntent().getExtras().getString("author"));
 
         findViewById(R.id.BTN_back).setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            super.onBackPressed();
+            overridePendingTransition(R.anim.slide_in_down, 0);
         });
 
         findViewById(R.id.BTN_learn).setOnClickListener(v -> {
@@ -84,6 +84,12 @@ public class PoemRead extends AppCompatActivity {
             change_add_button(btn_add);
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_down, 0);
     }
 
     @Override

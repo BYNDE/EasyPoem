@@ -92,15 +92,14 @@ public class search_activity extends AppCompatActivity implements search_output_
             }
         });
     }
+
     @Override
     public void onBackPressed() {
-
         back();
-
     }
+
     public void back(){
-        Intent intent = new Intent(search_activity.this,MainActivity.class);
-        startActivity(intent);
+        search_activity.super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
 
@@ -139,5 +138,6 @@ public class search_activity extends AppCompatActivity implements search_output_
         intent.putExtra("text", states.get(position).text);
         intent.putExtra("author", states.get(position).author);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_down, 0);
     }
 }

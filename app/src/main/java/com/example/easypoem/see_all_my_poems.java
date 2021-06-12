@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.easypoem.sqlite.MyDbManager;
 
@@ -17,6 +18,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
     private MyDbManager myDbManager = new MyDbManager(this);
     ArrayList<search_output> states = new ArrayList<search_output>();
     private Button button_all,button_added,button_created,button_learned,current_button;
+    private ImageButton add_button,back_button;
     private RecyclerView recyclerView;
     private search_output_item_adapter adapter;
 
@@ -32,6 +34,8 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         button_created = findViewById(R.id.button_created);
         button_added = findViewById(R.id.button_added);
         button_learned = findViewById(R.id.button_learned);
+        add_button = findViewById(R.id.imageButton_add);
+        back_button = findViewById(R.id.imageButton_back);
 
         current_button = button_all;
         recyclerView = (RecyclerView) findViewById(R.id.list);
@@ -40,6 +44,8 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         button_created.setOnClickListener(this);
         button_added.setOnClickListener(this);
         button_learned.setOnClickListener(this);
+        add_button.setOnClickListener(this);
+        back_button.setOnClickListener(this);
 
         myDbManager.openDb();
         String [][] mass = myDbManager.getFromDb();
@@ -63,6 +69,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         intent.putExtra("text", states.get(position).text);
         intent.putExtra("author", states.get(position).author);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_down, 0);
     }
 
     @Override
@@ -118,9 +125,25 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                     }
                 }
             break;
+
+            case R.id.imageButton_add:
+                Intent intent = new Intent(this,add_my_poem.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_down, 0);
+            break;
+
+            case R.id.imageButton_back:
+                super.onBackPressed();
+                overridePendingTransition(R.anim.slide_in_down, 0);
+                break;
         }
         adapter.notifyDataSetChanged();
         myDbManager.closeDb();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_down, 0);
+    }
 }

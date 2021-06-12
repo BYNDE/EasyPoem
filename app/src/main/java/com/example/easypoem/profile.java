@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class profile extends Fragment {
 
-    private ProfileViewModel mViewModel;
+
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
     public static profile newInstance() {
@@ -41,16 +41,7 @@ public class profile extends Fragment {
             }
         });
 
-
-
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

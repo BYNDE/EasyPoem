@@ -25,7 +25,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class my_poems extends Fragment {
 
-    private MyPoemsViewModel mViewModel;
     private boolean clicked = false;
     private MyDbManager myDbManager;
     private String [] last_poem_mass;
@@ -67,6 +66,7 @@ public class my_poems extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),see_all_my_poems.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
@@ -74,8 +74,9 @@ public class my_poems extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),add_my_poem.class);
+                Intent intent = new Intent(getActivity(),poem_learn_main.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
@@ -87,6 +88,7 @@ public class my_poems extends Fragment {
                 intent.putExtra("author", last_poem_mass[1]);
                 intent.putExtra("text", last_poem_mass[2]);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
@@ -104,12 +106,7 @@ public class my_poems extends Fragment {
 
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MyPoemsViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
 //    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
 //        setVisibility(clicked,button_new_folder,button_new_poem);
