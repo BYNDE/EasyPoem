@@ -1,19 +1,21 @@
 package com.example.easypoem;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.os.Handler;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.File;
 
-public class listen_activity extends AppCompatActivity  implements View.OnClickListener{
+public class fragment_learn_listening extends Fragment implements View.OnClickListener{
     private File file;
     private ImageButton play_button;
     private SeekBar seekBar;
@@ -23,22 +25,21 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
     private boolean isPlaying = false;
     private boolean audio_is_launched = false;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listen_activity);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        String path = this.getExternalFilesDir("/").getAbsolutePath();
+        View view = inflater.inflate(R.layout.fragment_learn_listening, container, false);
+
+        String path = getActivity().getExternalFilesDir("/").getAbsolutePath();
         file = new File(path+"/filename.3gp");
 
-        play_button = findViewById(R.id.play);
-        seekBar = findViewById(R.id.seekBar);
+        play_button = view.findViewById(R.id.play);
+        seekBar = view.findViewById(R.id.seekBar);
 
         play_button.setOnClickListener(this);
 
-        TextView tv_text = findViewById(R.id.TV_text);
+        TextView tv_text = view.findViewById(R.id.TV_text);
 
         tv_text.setText("— Скажи-ка, дядя, ведь не даром\n" +
                 "Москва, спаленная пожаром,\n" +
@@ -79,6 +80,8 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
                 "Уж мы пойдем ломить стеною,\n" +
                 "Уж постоим мы головою\n" +
                 "За родину свою!\n");
+
+        return view;
     }
 
     @Override
@@ -99,7 +102,6 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
         }
         isPlaying = !isPlaying;
     }
-
     private void pauseAudio(){
         mediaPlayer.pause();
         seekBarHandler.removeCallbacks(updateSeekBar);
@@ -178,9 +180,9 @@ public class listen_activity extends AppCompatActivity  implements View.OnClickL
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
-        if (isPlaying){
+        if (isPlaying) {
             mediaPlayer.stop();
         }
     }

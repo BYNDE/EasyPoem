@@ -100,7 +100,7 @@
                 android:textColor="@color/gray_hint"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Добавлено" />
+                android:text="Добавленные" />
 
             <Button
                 android:id="@+id/button_created"
@@ -111,7 +111,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Создано" />
+                android:text="Созданные" />
             <Button
                 android:id="@+id/button_learned"
                 android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:textSize="15sp"
-                android:text="Изучено" />
+                android:text="Изученные" />
 
             </LinearLayout>
 

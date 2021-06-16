@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -113,8 +114,10 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.correct:
-                Intent intent = new Intent(getActivity(), listen_activity.class);
-                startActivity(intent);
+                poem_learn_main poem_learn_main= new poem_learn_main();
+                fragment_learn_listening fragment_learn_listening = new fragment_learn_listening();
+                poem_learn_main.getInstance().replace_fragment(fragment_learn_listening);
+                poem_learn_main.getInstance().set_progress(100);
                 break;
         }
     }
@@ -154,7 +157,6 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
             return false;
         }
     }
-
     @Override
     public void onStop() {
         super.onStop();

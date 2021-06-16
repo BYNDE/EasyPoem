@@ -146,4 +146,10 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.onClick(current_button);
+    }
 }

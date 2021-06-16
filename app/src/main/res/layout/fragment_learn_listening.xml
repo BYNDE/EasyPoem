@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listen_activity">
+    tools:context=".fragment_learn_listening">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical"
-        android:layout_marginBottom="70dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginBottom="70dp">
 
 
         <ScrollView
@@ -25,18 +24,29 @@
                 android:gravity="center_horizontal|top"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Прослушайте и прочитайте стихотворение одновременно"
+                    android:textColor="@color/orange"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/TV_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:gravity="center_horizontal"
-                        android:text="Текст"
-                        android:textColor="@color/gray_hint"
-                        android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/TV_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="Текст"
+                    android:textColor="@color/gray_hint"
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -72,6 +82,5 @@
             android:progressTint="@color/white"/>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

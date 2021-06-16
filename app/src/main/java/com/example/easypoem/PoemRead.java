@@ -16,18 +16,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class PoemRead extends AppCompatActivity {
     private MyDbManager myDbManager;
     private boolean if_added = false;
+    private boolean delete_active = false;
 
     public void change_add_button(Button btn_add){
-        if (if_added){
-            Drawable img_added = ContextCompat.getDrawable(this, R.drawable.ic_done_24);
-            btn_add.setCompoundDrawablesWithIntrinsicBounds(img_added,null,null,null);
-            btn_add.setText("Добавлено");
-        }
-        else{
-            Drawable img_added = ContextCompat.getDrawable(this, R.drawable.ic_button_add_24);
-            btn_add.setCompoundDrawablesWithIntrinsicBounds(img_added,null,null,null);
-            btn_add.setText("Добавить");
-        }
+        Drawable img_added = ContextCompat.getDrawable(this, R.drawable.ic_button_delete_24);
+        btn_add.setCompoundDrawablesWithIntrinsicBounds(img_added,null,null,null);
+        btn_add.setText("Удалить");
 
     }
 
@@ -74,14 +68,18 @@ public class PoemRead extends AppCompatActivity {
             if (if_added){
                 myDbManager.deleteFromDb(getIntent().getExtras().getString("title"),
                         getIntent().getExtras().getString("author"));
+                super.onBackPressed();
+                overridePendingTransition(R.anim.slide_in_down, 0);
+
             }
             else{
                 myDbManager.insertToDb(getIntent().getExtras().getString("title"),
                         getIntent().getExtras().getString("author"),
                         getIntent().getExtras().getString("text"),0);
+                change_add_button(btn_add);
+                if_added = true;
             }
-            if_added = !if_added;
-            change_add_button(btn_add);
+
 
         });
     }

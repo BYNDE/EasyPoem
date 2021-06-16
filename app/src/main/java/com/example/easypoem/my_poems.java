@@ -51,13 +51,7 @@ public class my_poems extends Fragment {
         add_poem_layout = view.findViewById(R.id.add_poem_layout);
         last_poem_layout = view.findViewById(R.id.last_poem_layout);
 
-        myDbManager = new MyDbManager(getActivity());
-        myDbManager.openDb();
-        if (myDbManager.getLast() != null){
-            last_poem_mass = myDbManager.getLast();
-            setLastPoem();
-        }
-        myDbManager.closeDb();
+        updateLastPoem();
 
 
 
@@ -95,20 +89,42 @@ public class my_poems extends Fragment {
         return view;
     }
 
-    private void setLastPoem() {
-        last_poem_title_tv.setText(last_poem_mass[0]);
-        last_poem_author_tv.setText(last_poem_mass[1]);
-        add_poem_layout.setVisibility(View.INVISIBLE);
-        last_poem_layout.setVisibility(View.VISIBLE);
+    private void updateLastPoem() {
+        myDbManager = new MyDbManager(getActivity());
+        myDbManager.openDb();
+        if (myDbManager.getLast() != null){
+            last_poem_mass = myDbManager.getLast();
+            setLastPoem(true);
+        }else{
+            setLastPoem(false);
+        }
+        myDbManager.closeDb();
+    }
+
+    private void setLastPoem(boolean added) {
+        if (added){
+            last_poem_title_tv.setText(last_poem_mass[0]);
+            last_poem_author_tv.setText(last_poem_mass[1]);
+            add_poem_layout.setVisibility(View.INVISIBLE);
+            last_poem_layout.setVisibility(View.VISIBLE);
+        }else {
+            add_poem_layout.setVisibility(View.VISIBLE);
+            last_poem_layout.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     private void check_added() {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateLastPoem();
+    }
 
-
-//    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
+    //    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
 //        setVisibility(clicked,button_new_folder,button_new_poem);
 //        setAnimation(clicked,button_add,button_new_folder,button_new_poem);
 //        setClickable(clicked,button_new_folder,button_new_poem);

@@ -14,9 +14,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPoem">
-        <activity android:name=".poem_learn_main"></activity>
-        <activity android:name=".listen_activity" />
-        <activity android:name=".record_activity" />
+        <activity android:name=".poem_learn_main"/>
         <activity android:name=".PoemLearnStage2" />
         <activity android:name=".PoemLearnStage1" />
         <activity android:name=".drag_and_drop" />

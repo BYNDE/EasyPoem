@@ -48,16 +48,18 @@
                 android:textSize="20sp"/>
 
             <ImageButton
-                android:id="@+id/imageButton_add"
+                android:id="@+id/imageButton_skip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@color/orange"
                 app:tint = "@color/white"
-                app:srcCompat="@drawable/ic_button_idea_24"
+                app:srcCompat="@drawable/ic_button_skip_24"
                 android:contentDescription="@string/imagebutton_back" />
         </LinearLayout>
 

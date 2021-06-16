@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:orientation="vertical"
-        android:layout_marginBottom="55dp">
+        android:layout_marginBottom="50dp">
 
 
         <ScrollView
@@ -62,7 +62,7 @@
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,6 @@
             android:focusable="true"
             app:background="@color/orange"
             app:tint = "@color/white"
-            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +97,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="5dp"
             android:layout_marginStart="30dp"
             android:visibility="invisible"
             android:contentDescription="@string/fab_add"
@@ -117,7 +115,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="5dp"
         android:contentDescription="@string/fab_add"
         style="?android:attr/borderlessButtonStyle"
         android:src="@drawable/ic_button_record_40" />
