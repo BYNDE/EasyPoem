@@ -43,6 +43,7 @@ public class PoemLearnStage1 extends AppCompatActivity {
         Text text = new Text(getIntent().getExtras().getString("text"));
         movelist = new ArrayList<>();
         movelist.addAll(Arrays.asList(text.lines));
+//        Collections.shuffle(movelist); Debug
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter(movelist);

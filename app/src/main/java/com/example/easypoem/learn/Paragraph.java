@@ -2,43 +2,19 @@ package com.example.easypoem.learn;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-public class Text {
+public class Paragraph {
     public String text;
     public String[] words;
     public String selectedWord;
     public String[] lines;
     public String selectedLine;
-    public Paragraph[] paragraph;
-    public Paragraph selectedParagraph;
 
-
-    public Text(String text) {
+    public Paragraph(String text) {
         this.text = text;
         words = text.split("\\b");
         lines = text.split("\\n+");
-        Log.println(Log.DEBUG, "DEBUG", String.valueOf(getLengthParagraphs()));
-        String[] tempParagraph = new String[getLengthParagraphs()];
-        paragraph = new Paragraph[getLengthParagraphs()];
-        tempParagraph[0] = "";
-        int j = 0;
-        for (int i = 0; i < lines.length; i++) {
-            if (lines[i].equals(" ")) {
-                paragraph[j] = new Paragraph(tempParagraph[j]);
-                j++;
-            }
-            tempParagraph[j] += lines[i] + "\n";
-        }
-    }
-    public int getLengthParagraphs() {
-        int j = 1;
-        for (int i = 0; i < lines.length ; i++) {
-            if (lines[i].equals(" "))
-                j++;
-        }
-        return j;
     }
 
     public void setText(String text) {
@@ -111,15 +87,4 @@ public class Text {
         selectedLine = lines[i];
     }
 
-    public void setParagraph(int i, Paragraph p) {
-        paragraph[i] = p;
-    }
-
-    public Paragraph getParagraph(int i) {
-        return paragraph[i];
-    }
-
-    public void selectParagraph(int i) {
-        selectedParagraph = paragraph[i];
-    }
 }
