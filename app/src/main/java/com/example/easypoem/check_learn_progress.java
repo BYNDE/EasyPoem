@@ -3,19 +3,31 @@ package com.example.easypoem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+<<<<<<< HEAD
 import android.view.View;
+=======
+import android.os.Parcelable;
+import android.util.Log;
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.easypoem.learn.Text;
+
 public class check_learn_progress extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView text_tv;
+<<<<<<< HEAD
     private ImageButton reset_button, back_button;
+=======
+    private Text text;
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +37,15 @@ public class check_learn_progress extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         text_tv = findViewById(R.id.TV_text);
+<<<<<<< HEAD
         back_button = findViewById(R.id.imageButton_back);
         reset_button = findViewById(R.id.imageButton_reset);
 
+=======
+        text = new Text(getIntent().getExtras().getString("text"));
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 
-        text_tv.setText("— Скажи-ка, дядя, ведь не даром\n" +
-                "Москва, спаленная пожаром,\n" +
-                "Французу отдана?\n" +
-                "Ведь были ж схватки боевые,\n" +
-                "Да, говорят, еще какие!\n" +
-                "Недаром помнит вся Россия\n" +
-                "Про день Бородина!\n");
+        text_tv.setText(text.paragraph[0].text);
 
         progressBar.setMax(10000);
 
@@ -50,7 +60,12 @@ public class check_learn_progress extends AppCompatActivity {
 
 
 
-
+        findViewById(R.id.button_continue).setOnClickListener(v -> {
+            Intent intent = new Intent(this, PoemLearnStage2.class);
+            intent.putExtra("paragraph", text.paragraph[0].text); //getIntent().getExtras().getString("text")
+            intent.putExtra("title", getIntent().getExtras().getString("title"));
+            startActivity(intent);
+        });
 
     }
     private void updateRunnable(int progress) {

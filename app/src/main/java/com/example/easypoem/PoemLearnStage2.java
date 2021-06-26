@@ -6,15 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.ClipData;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easypoem.learn.Paragraph;
 import com.example.easypoem.learn.Text;
+import com.google.android.flexbox.AlignContent;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
@@ -29,7 +34,7 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
     RecyclerView words_recycler;
     word_item_adapter adapter;
     View entered_word;
-    Text text;
+    Paragraph text;
     ArrayList<String> words = new ArrayList<>();
     TextView selectTextView;
     FlexboxLayout flexboxLayout;
@@ -41,10 +46,12 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         setContentView(R.layout.activity_drag_and_drop);
         words_recycler = findViewById(R.id.words_recycler);
         flexboxLayout = findViewById(R.id.flex_layout);
-        text = new Text(getIntent().getExtras().getString("text"));
+        text = new Paragraph(getIntent().getExtras().getString("paragraph"));
+
 
         FlexboxLayoutManager manager = new FlexboxLayoutManager(this);
         manager.setFlexDirection(FlexDirection.ROW);
+        manager.setFlexWrap(FlexWrap.WRAP);
         manager.setJustifyContent(JustifyContent.CENTER);
         manager.setAlignItems(AlignItems.CENTER);
 
@@ -58,6 +65,7 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         word_textview = findViewById(R.id.word);
 
         word_textview.setOnDragListener(dragListener);
+
     }
 
     @Override
@@ -109,17 +117,13 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
                 case DragEvent.ACTION_DRAG_EXITED:
                     break;
                 case DragEvent.ACTION_DROP:
-                    if (word_textview.getText().toString().equals(text.selectedWord)) {
-                        selectword();
-                        Toast.makeText(getApplicationContext(), "true", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (!word_textview.getText().toString().equals("_______")) {
-                        words.add(word_textview.getText().toString()); 
-                    }
                     word_textview.setText(word_entered_text);
                     word_correct = true;
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
+                    if (!word_textview.getText().toString().equals("_______")) {
+                        words.add(word_textview.getText().toString());
+                    }
                     if (word_correct){
                         words.remove(word_entered_text);
                         words_recycler.setAdapter(adapter);
@@ -127,6 +131,8 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
                         entered_word.setVisibility(View.VISIBLE);
                     }
                     word_correct = false;
+                    if (word_textview.getText().toString().equals(text.selectedWord))
+                        selectword();
                     break;
             }
             return true;
