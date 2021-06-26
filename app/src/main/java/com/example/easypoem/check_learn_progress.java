@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class check_learn_progress extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView text_tv;
+    private ImageButton reset_button, back_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,9 @@ public class check_learn_progress extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         text_tv = findViewById(R.id.TV_text);
+        back_button = findViewById(R.id.imageButton_back);
+        reset_button = findViewById(R.id.imageButton_reset);
+
 
         text_tv.setText("— Скажи-ка, дядя, ведь не даром\n" +
                 "Москва, спаленная пожаром,\n" +
@@ -34,6 +40,14 @@ public class check_learn_progress extends AppCompatActivity {
         progressBar.setMax(10000);
 
         updateRunnable(7000);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back();
+            }
+        });
+
+
 
 
 
@@ -45,5 +59,15 @@ public class check_learn_progress extends AppCompatActivity {
         animation.setDuration(1100);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        back();
+    }
+
+    public void back(){
+        check_learn_progress.super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_down, 0);
     }
 }
