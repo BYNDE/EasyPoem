@@ -35,8 +35,8 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         back_button.setOnClickListener(this);
 
 
-        fragment_learn_record fragment_learn_record = new fragment_learn_record();
-        replace_fragment(fragment_learn_record);
+        fragment_drag_and_drop fragment_drag_and_drop = new fragment_drag_and_drop();
+        replace_fragment(fragment_drag_and_drop);
         progressBar.setProgress(50);
 
 
