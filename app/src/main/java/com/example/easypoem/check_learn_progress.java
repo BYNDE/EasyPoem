@@ -6,9 +6,12 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+<<<<<<< HEAD
 import android.view.View;
+=======
 import android.os.Parcelable;
 import android.util.Log;
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
@@ -20,8 +23,11 @@ import com.example.easypoem.learn.Text;
 public class check_learn_progress extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView text_tv;
+<<<<<<< HEAD
     private ImageButton reset_button, back_button;
+=======
     private Text text;
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +37,13 @@ public class check_learn_progress extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         text_tv = findViewById(R.id.TV_text);
+<<<<<<< HEAD
         back_button = findViewById(R.id.imageButton_back);
         reset_button = findViewById(R.id.imageButton_reset);
 
+=======
         text = new Text(getIntent().getExtras().getString("text"));
+>>>>>>> a3b38e852e6f6b18ba4c120388754af440d5ea0a
 
         text_tv.setText(text.paragraph[0].text);
 
