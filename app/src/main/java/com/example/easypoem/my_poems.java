@@ -51,7 +51,13 @@ public class my_poems extends Fragment {
         add_poem_layout = view.findViewById(R.id.add_poem_layout);
         last_poem_layout = view.findViewById(R.id.last_poem_layout);
 
-        updateLastPoem();
+        myDbManager = new MyDbManager(getActivity());
+        myDbManager.openDb();
+        if (myDbManager.getLast() != null){
+            last_poem_mass = myDbManager.getLast();
+            setLastPoem();
+        }
+        myDbManager.closeDb();
 
 
 
@@ -60,7 +66,6 @@ public class my_poems extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),see_all_my_poems.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
@@ -68,9 +73,8 @@ public class my_poems extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),poem_learn_main.class);
+                Intent intent = new Intent(getActivity(),add_my_poem.class);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
@@ -82,49 +86,25 @@ public class my_poems extends Fragment {
                 intent.putExtra("author", last_poem_mass[1]);
                 intent.putExtra("text", last_poem_mass[2]);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slide_in_down, 0);
             }
         });
 
         return view;
     }
 
-    private void updateLastPoem() {
-        myDbManager = new MyDbManager(getActivity());
-        myDbManager.openDb();
-        if (myDbManager.getLast() != null){
-            last_poem_mass = myDbManager.getLast();
-            setLastPoem(true);
-        }else{
-            setLastPoem(false);
-        }
-        myDbManager.closeDb();
-    }
-
-    private void setLastPoem(boolean added) {
-        if (added){
-            last_poem_title_tv.setText(last_poem_mass[0]);
-            last_poem_author_tv.setText(last_poem_mass[1]);
-            add_poem_layout.setVisibility(View.INVISIBLE);
-            last_poem_layout.setVisibility(View.VISIBLE);
-        }else {
-            add_poem_layout.setVisibility(View.VISIBLE);
-            last_poem_layout.setVisibility(View.INVISIBLE);
-        }
-
+    private void setLastPoem() {
+        last_poem_title_tv.setText(last_poem_mass[0]);
+        last_poem_author_tv.setText(last_poem_mass[1]);
+        add_poem_layout.setVisibility(View.INVISIBLE);
+        last_poem_layout.setVisibility(View.VISIBLE);
     }
 
     private void check_added() {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateLastPoem();
-    }
 
-    //    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
+//    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
 //        setVisibility(clicked,button_new_folder,button_new_poem);
 //        setAnimation(clicked,button_add,button_new_folder,button_new_poem);
 //        setClickable(clicked,button_new_folder,button_new_poem);
