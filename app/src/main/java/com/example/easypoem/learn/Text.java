@@ -20,16 +20,20 @@ public class Text {
         words = text.split("\\b");
         lines = text.split("\\n+");
         Log.println(Log.DEBUG, "DEBUG", String.valueOf(getLengthParagraphs()));
-        String[] tempParagraph = new String[getLengthParagraphs()];
-        paragraph = new Paragraph[getLengthParagraphs()];
-        tempParagraph[0] = "";
-        int j = 0;
-        for (int i = 0; i < lines.length; i++) {
-            if (lines[i].equals(" ")) {
-                paragraph[j] = new Paragraph(tempParagraph[j]);
-                j++;
+        if (getLengthParagraphs() == 0) {
+            paragraph[0] = new Paragraph(text);
+        } else {
+            String[] tempParagraph = new String[getLengthParagraphs()];
+            paragraph = new Paragraph[getLengthParagraphs()];
+            tempParagraph[0] = "";
+            int j = 0;
+            for (int i = 0; i < lines.length; i++) {
+                if (lines[i].equals(" ")) {
+                    paragraph[j] = new Paragraph(tempParagraph[j]);
+                    j++;
+                }
+                tempParagraph[j] += lines[i] + "\n";
             }
-            tempParagraph[j] += lines[i] + "\n";
         }
     }
     public int getLengthParagraphs() {
