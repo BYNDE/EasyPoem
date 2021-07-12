@@ -36,7 +36,12 @@ public class check_learn_progress extends AppCompatActivity {
 
         text = new Text(getIntent().getExtras().getString("text"));
 
-        text_tv.setText(text.paragraph[0].text);
+        if (text.getLengthParagraphs() == 0) {
+            text_tv.setText("Not text - Error 1");
+        } else if (text.paragraph[0].text == null ){
+            text_tv.setText("Not text - Error 2");
+        } else text_tv.setText(text.paragraph[0].text);
+
 
         progressBar.setMax(10000);
 
