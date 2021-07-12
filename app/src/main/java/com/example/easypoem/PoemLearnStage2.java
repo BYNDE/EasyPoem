@@ -4,19 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipData;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.easypoem.learn.Paragraph;
 import com.example.easypoem.learn.Text;
-import com.google.android.flexbox.AlignContent;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -34,7 +28,7 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
     RecyclerView words_recycler;
     word_item_adapter adapter;
     View entered_word;
-    Paragraph text;
+    Text text;
     ArrayList<String> words = new ArrayList<>();
     TextView selectTextView;
     FlexboxLayout flexboxLayout;
@@ -46,7 +40,7 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         setContentView(R.layout.activity_drag_and_drop);
         words_recycler = findViewById(R.id.words_recycler);
         flexboxLayout = findViewById(R.id.flex_layout);
-        text = new Paragraph(getIntent().getExtras().getString("paragraph"));
+        text = new Text(getIntent().getExtras().getString("paragraph"));
 
 
         FlexboxLayoutManager manager = new FlexboxLayoutManager(this);

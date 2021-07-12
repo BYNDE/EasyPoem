@@ -11,8 +11,8 @@ public class Text {
     public String selectedWord;
     public String[] lines;
     public String selectedLine;
-    public Paragraph[] paragraph;
-    public Paragraph selectedParagraph;
+    public Text[] paragraph;
+    public Text selectedParagraph;
 
 
     public Text(String text) {
@@ -21,15 +21,15 @@ public class Text {
         lines = text.split("\\n+");
         Log.println(Log.DEBUG, "DEBUG", String.valueOf(getLengthParagraphs()));
         if (getLengthParagraphs() == 0) {
-            paragraph[0] = new Paragraph(text);
+            paragraph[0] = new Text(text);
         } else {
             String[] tempParagraph = new String[getLengthParagraphs()];
-            paragraph = new Paragraph[getLengthParagraphs()];
+            paragraph = new Text[getLengthParagraphs()];
             tempParagraph[0] = "";
             int j = 0;
             for (int i = 0; i < lines.length; i++) {
                 if (lines[i].equals(" ")) {
-                    paragraph[j] = new Paragraph(tempParagraph[j]);
+                    paragraph[j] = new Text(tempParagraph[j]);
                     j++;
                 }
                 tempParagraph[j] += lines[i] + "\n";
@@ -115,11 +115,11 @@ public class Text {
         selectedLine = lines[i];
     }
 
-    public void setParagraph(int i, Paragraph p) {
+    public void setParagraph(int i, Text p) {
         paragraph[i] = p;
     }
 
-    public Paragraph getParagraph(int i) {
+    public Text getParagraph(int i) {
         return paragraph[i];
     }
 
