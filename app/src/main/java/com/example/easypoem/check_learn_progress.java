@@ -53,7 +53,7 @@ public class check_learn_progress extends AppCompatActivity {
 
         findViewById(R.id.button_continue).setOnClickListener(v -> {
             Intent intent = new Intent(this, PoemLearnStage2.class);
-            intent.putExtra("paragraph", text.paragraph[0].text); //getIntent().getExtras().getString("text")
+            intent.putExtra("text", text); //getIntent().getExtras().getString("text")
             intent.putExtra("title", getIntent().getExtras().getString("title"));
             startActivity(intent);
         });

@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.easypoem.learn.Paragraph;
 import com.example.easypoem.learn.Text;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
@@ -29,9 +32,12 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
     word_item_adapter adapter;
     View entered_word;
     Text text;
+    Paragraph paragraph;
     ArrayList<String> words = new ArrayList<>();
     TextView selectTextView;
     FlexboxLayout flexboxLayout;
+    int level = 0;
+    int countLevels = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,26 +46,14 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
         setContentView(R.layout.activity_drag_and_drop);
         words_recycler = findViewById(R.id.words_recycler);
         flexboxLayout = findViewById(R.id.flex_layout);
-        text = new Text(getIntent().getExtras().getString("paragraph"));
-
-
-        FlexboxLayoutManager manager = new FlexboxLayoutManager(this);
-        manager.setFlexDirection(FlexDirection.ROW);
-        manager.setFlexWrap(FlexWrap.WRAP);
-        manager.setJustifyContent(JustifyContent.CENTER);
-        manager.setAlignItems(AlignItems.CENTER);
+        text = (Text) getIntent().getExtras().get("text");
+        paragraph = text.getParagraph();
+        if (paragraph == null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
 
         selectword();
-
-        adapter = new word_item_adapter(this, words,this);
-        words_recycler.setLayoutManager(manager);
-
-        words_recycler.setAdapter(adapter);
-
-        word_textview = findViewById(R.id.word);
-
-        word_textview.setOnDragListener(dragListener);
-
     }
 
     @Override
@@ -73,14 +67,24 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
     }
 
     public void selectword() {
+        if (level == countLevels) {
+            // ... Выполняется при завершений уровня
+            // ! Желатель сразу перейти на следуйщий уровень
+            Intent intent = new Intent(this, PoemLearnStage2.class);
+            intent.putExtra("text", text); //getIntent().getExtras().getString("text")
+            intent.putExtra("title", getIntent().getExtras().getString("title"));
+            startActivity(intent);
+            return;
+        }
+        level++;
         flexboxLayout.removeAllViews();
         words.clear();
-        int selectidWord = text.randomWord();
-        text.selectWord(selectidWord);
-        for (int i = 0; i < text.words.length; i++) {
+        int selectidWord = paragraph.randomWord();
+        paragraph.selectWord(selectidWord);
+        for (int i = 0; i < paragraph.words.length; i++) {
             if (i != selectidWord) {
                 TextView textView = new TextView(this);
-                textView.setText(text.words[i]);
+                textView.setText(paragraph.words[i]);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextSize(25);
                 flexboxLayout.addView(textView);
@@ -95,10 +99,26 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
             }
         }
 
-        words.add(text.selectedWord);
-        words.add(text.words[text.randomWord()]);
-        words.add(text.words[text.randomWord()]);
+        words.add(paragraph.selectedWord);
+        words.add(paragraph.words[paragraph.randomWord()]);
+        words.add(paragraph.words[paragraph.randomWord()]);
         Collections.shuffle(words);
+
+
+        FlexboxLayoutManager manager = new FlexboxLayoutManager(this);
+        manager.setFlexDirection(FlexDirection.ROW);
+        manager.setFlexWrap(FlexWrap.WRAP);
+        manager.setJustifyContent(JustifyContent.CENTER);
+        manager.setAlignItems(AlignItems.CENTER);
+
+        adapter = new word_item_adapter(this, words,this);
+        words_recycler.setLayoutManager(manager);
+
+        words_recycler.setAdapter(adapter);
+
+        word_textview = findViewById(R.id.word);
+
+        word_textview.setOnDragListener(dragListener);
     }
 
     View.OnDragListener dragListener = new View.OnDragListener() {
@@ -115,9 +135,6 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
                     word_correct = true;
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if (!word_textview.getText().toString().equals("_______")) {
-                        words.add(word_textview.getText().toString());
-                    }
                     if (word_correct){
                         words.remove(word_entered_text);
                         words_recycler.setAdapter(adapter);
@@ -125,7 +142,7 @@ public class PoemLearnStage2 extends AppCompatActivity implements word_item_adap
                         entered_word.setVisibility(View.VISIBLE);
                     }
                     word_correct = false;
-                    if (word_textview.getText().toString().equals(text.selectedWord))
+                    if (word_textview.getText().toString().equals(paragraph.selectedWord))
                         selectword();
                     break;
             }
