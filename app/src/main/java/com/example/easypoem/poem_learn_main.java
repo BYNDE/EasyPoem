@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
+import com.example.easypoem.learn.Text;
+
 public class poem_learn_main extends AppCompatActivity implements View.OnClickListener{
     private FrameLayout fragment_layout;
     private static poem_learn_main instance;
@@ -34,9 +36,14 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         skip_button.setOnClickListener(this);
         back_button.setOnClickListener(this);
 
+        String current_text = getIntent().getExtras().getString("text");
+        Bundle bundle = new Bundle();
+        bundle.putString("text", current_text );
 
-        fragment_learn_record fragment_learn_record = new fragment_learn_record();
-        replace_fragment(fragment_learn_record);
+        fragment_drag_and_drop fragment_drag_and_drop = new fragment_drag_and_drop();
+       fragment_drag_and_drop.setArguments(bundle);
+
+        replace_fragment(fragment_drag_and_drop);
         progressBar.setProgress(50);
 
 

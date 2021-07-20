@@ -5,12 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,9 +48,8 @@ public class check_learn_progress extends AppCompatActivity {
 
 
         findViewById(R.id.button_continue).setOnClickListener(v -> {
-            Intent intent = new Intent(this, PoemLearnStage2.class);
-            intent.putExtra("paragraph", text.paragraph[0].text); //getIntent().getExtras().getString("text")
-            intent.putExtra("title", getIntent().getExtras().getString("title"));
+            Intent intent = new Intent(this, poem_learn_main.class);
+            intent.putExtra("text",text.paragraph[0].text);
             startActivity(intent);
         });
 
