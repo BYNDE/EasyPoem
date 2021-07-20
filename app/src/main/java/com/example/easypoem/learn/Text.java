@@ -1,48 +1,110 @@
 package com.example.easypoem.learn;
 
+import android.content.Intent;
 import android.util.Log;
 
+import com.example.easypoem.check_learn_progress;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Text {
+public class Text implements Serializable {
     public String text;
     public String[] words;
     public String selectedWord;
     public String[] lines;
     public String selectedLine;
-    public Text[] paragraph;
-    public Text selectedParagraph;
+    public Paragraph[] paragraph;
+    public Paragraph selectedParagraph;
+    public int countLevels;
+    public int level;
 
 
     public Text(String text) {
         this.text = text;
         words = text.split("\\b");
         lines = text.split("\\n+");
-        Log.println(Log.DEBUG, "DEBUG", String.valueOf(getLengthParagraphs()));
-        if (getLengthParagraphs() == 0) {
-            paragraph[0] = new Text(text);
+        if (getLengthParagraphsIsOne() == 1 && getLengthParagraphsIsTwo() != 1) {
+            String[] tempParagraph = new String[getLengthParagraphsIsTwo()];
+            paragraph = new Paragraph[getLengthParagraphsIsTwo()];
+            tempParagraph[0] = "";
+
+            double src = lines.length / 5;
+            int res = (int)src; //целая часть
+            double answer = (src - res) * 10;
+            if (answer >= 5) {
+                answer -= 5;
+            }
+
+            int i = 0;
+            int j = 0;
+            while (i < getLengthParagraphsIsTwo() - 1) {
+                tempParagraph[i] += lines[j++] + "\n";
+                if (i+1 == getLengthParagraphsIsTwo() - 1) {
+                    if (j == 4 + answer) {
+                        j = 5;
+                        paragraph[i] = new Paragraph(tempParagraph[i++]);
+                        tempParagraph[i] = "";
+                    }
+                } else {
+                    if (j == 5) {
+                        j = 0;
+                        paragraph[i] = new Paragraph(tempParagraph[i++]);
+                        tempParagraph[i] = "";
+                    }
+                }
+            }
+            countLevels = getLengthParagraphsIsTwo();
+        } else if (getLengthParagraphsIsOne() == 1 && getLengthParagraphsIsTwo() == 1) {
+            paragraph[0] = new Paragraph(text);
+            countLevels = 1;
         } else {
-            String[] tempParagraph = new String[getLengthParagraphs()];
-            paragraph = new Text[getLengthParagraphs()];
+            String[] tempParagraph = new String[getLengthParagraphsIsOne()];
+            paragraph = new Paragraph[getLengthParagraphsIsOne()];
             tempParagraph[0] = "";
             int j = 0;
             for (int i = 0; i < lines.length; i++) {
                 if (lines[i].equals(" ")) {
-                    paragraph[j] = new Text(tempParagraph[j]);
+                    paragraph[j] = new Paragraph(tempParagraph[j]);
                     j++;
+                    tempParagraph[j] = "";
                 }
                 tempParagraph[j] += lines[i] + "\n";
             }
+            countLevels = getLengthParagraphsIsOne();
         }
     }
-    public int getLengthParagraphs() {
+    public int getLengthParagraphsIsOne() {
         int j = 1;
         for (int i = 0; i < lines.length ; i++) {
             if (lines[i].equals(" "))
                 j++;
         }
         return j;
+    }
+
+    public Paragraph getParagraph() {
+        if (level == countLevels) {
+            // ... Делаем что то по окончанию
+            // ! переход на интент не работает, надо обрабатовать в классе.
+
+            return null;
+        }
+        return paragraph[level++];
+    }
+
+    public int getLengthParagraphsIsTwo() {
+        double src = lines.length / 5;
+        int res = (int)src; //целая часть
+        double answer = src - res;
+
+        if (answer == 0 || answer < 0.5f) {
+            return lines.length / 5;
+        } else if (answer != 0 && answer >= 0.5f) {
+            return lines.length / 5 + 1;
+        }
+        return 1;
     }
 
     public void setText(String text) {
@@ -115,11 +177,11 @@ public class Text {
         selectedLine = lines[i];
     }
 
-    public void setParagraph(int i, Text p) {
+    public void setParagraph(int i, Paragraph p) {
         paragraph[i] = p;
     }
 
-    public Text getParagraph(int i) {
+    public Paragraph getParagraph(int i) {
         return paragraph[i];
     }
 
