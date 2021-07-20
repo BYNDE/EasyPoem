@@ -21,6 +21,7 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
     private SeekBar seekBar;
     private Handler seekBarHandler;
     private Runnable updateSeekBar;
+    private String current_text;
     private MediaPlayer mediaPlayer = null;
     private boolean isPlaying = false;
     private boolean audio_is_launched = false;
@@ -41,45 +42,9 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
 
         TextView tv_text = view.findViewById(R.id.TV_text);
 
-        tv_text.setText("— Скажи-ка, дядя, ведь не даром\n" +
-                "Москва, спаленная пожаром,\n" +
-                "Французу отдана?\n" +
-                "Ведь были ж схватки боевые,\n" +
-                "Да, говорят, еще какие!\n" +
-                "Недаром помнит вся Россия\n" +
-                "Про день Бородина!\n" +
-                "\n" +
-                "— Да, были люди в наше время,\n" +
-                "Не то, что нынешнее племя:\n" +
-                "Богатыри — не вы!\n" +
-                "Плохая им досталась доля:\n" +
-                "Немногие вернулись с поля…\n" +
-                "Не будь на то господня воля,\n" +
-                "Не отдали б Москвы!\n" +
-                "\n" +
-                "Мы долго молча отступали,\n" +
-                "Досадно было, боя ждали,\n" +
-                "Ворчали старики:\n" +
-                "«Что ж мы? на зимние квартиры?\n" +
-                "Не смеют, что ли, командиры\n" +
-                "Чужие изорвать мундиры\n" +
-                "О русские штыки?»\n" +
-                "\n" +
-                "И вот нашли большое поле:\n" +
-                "Есть разгуляться где на воле!\n" +
-                "Построили редут.\n" +
-                "У наших ушки на макушке!\n" +
-                "Чуть утро осветило пушки\n" +
-                "И леса синие верхушки —\n" +
-                "Французы тут как тут.\n" +
-                "\n" +
-                "Забил заряд я в пушку туго\n" +
-                "И думал: угощу я друга!\n" +
-                "Постой-ка, брат мусью!\n" +
-                "Что тут хитрить, пожалуй к бою;\n" +
-                "Уж мы пойдем ломить стеною,\n" +
-                "Уж постоим мы головою\n" +
-                "За родину свою!\n");
+        current_text = this.getArguments().getString("text");
+
+        tv_text.setText(current_text);
 
         return view;
     }
@@ -161,10 +126,13 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                play_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_button_play_40));
-                isPlaying = false;
-                stopAudio();
-                audio_is_launched = false;
+                Bundle bundle = new Bundle();
+                bundle.putString("text", current_text);
+                poem_learn_main poem_learn_main= new poem_learn_main();
+                fragment_drag_and_drop fragment_drag_and_drop = new fragment_drag_and_drop();
+                fragment_drag_and_drop.setArguments(bundle);
+                poem_learn_main.getInstance().replace_fragment(fragment_drag_and_drop);
+                poem_learn_main.getInstance().set_progress(0);
             }
         });
     }

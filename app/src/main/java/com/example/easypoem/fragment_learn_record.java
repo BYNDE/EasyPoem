@@ -38,45 +38,7 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
         TextView tv_text = view.findViewById(R.id.TV_text);
 
 
-        tv_text.setText("— Скажи-ка, дядя, ведь не даром\n" +
-                "Москва, спаленная пожаром,\n" +
-                "Французу отдана?\n" +
-                "Ведь были ж схватки боевые,\n" +
-                "Да, говорят, еще какие!\n" +
-                "Недаром помнит вся Россия\n" +
-                "Про день Бородина!\n" +
-                "\n" +
-                "— Да, были люди в наше время,\n" +
-                "Не то, что нынешнее племя:\n" +
-                "Богатыри — не вы!\n" +
-                "Плохая им досталась доля:\n" +
-                "Немногие вернулись с поля…\n" +
-                "Не будь на то господня воля,\n" +
-                "Не отдали б Москвы!\n" +
-                "\n" +
-                "Мы долго молча отступали,\n" +
-                "Досадно было, боя ждали,\n" +
-                "Ворчали старики:\n" +
-                "«Что ж мы? на зимние квартиры?\n" +
-                "Не смеют, что ли, командиры\n" +
-                "Чужие изорвать мундиры\n" +
-                "О русские штыки?»\n" +
-                "\n" +
-                "И вот нашли большое поле:\n" +
-                "Есть разгуляться где на воле!\n" +
-                "Построили редут.\n" +
-                "У наших ушки на макушке!\n" +
-                "Чуть утро осветило пушки\n" +
-                "И леса синие верхушки —\n" +
-                "Французы тут как тут.\n" +
-                "\n" +
-                "Забил заряд я в пушку туго\n" +
-                "И думал: угощу я друга!\n" +
-                "Постой-ка, брат мусью!\n" +
-                "Что тут хитрить, пожалуй к бою;\n" +
-                "Уж мы пойдем ломить стеною,\n" +
-                "Уж постоим мы головою\n" +
-                "За родину свою!\n");
+        tv_text.setText(this.getArguments().getString("text"));
 
 
         record_button.setOnClickListener(this);
@@ -114,8 +76,11 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
                 break;
 
             case R.id.correct:
+                Bundle bundle = new Bundle();
+                bundle.putString("text", this.getArguments().getString("text"));
                 poem_learn_main poem_learn_main= new poem_learn_main();
                 fragment_learn_listening fragment_learn_listening = new fragment_learn_listening();
+                fragment_learn_listening.setArguments(bundle);
                 poem_learn_main.getInstance().replace_fragment(fragment_learn_listening);
                 poem_learn_main.getInstance().set_progress(100);
                 break;

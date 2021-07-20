@@ -15,7 +15,7 @@ import com.example.easypoem.learn.Text;
 
 public class check_learn_progress extends AppCompatActivity {
     private ProgressBar progressBar;
-    private TextView text_tv;
+    private TextView text_tv, title_tv;
     private ImageButton reset_button, back_button;
     private Text text;
 
@@ -27,8 +27,11 @@ public class check_learn_progress extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressBar);
         text_tv = findViewById(R.id.TV_text);
+        title_tv = findViewById(R.id.title);
         back_button = findViewById(R.id.imageButton_back);
         reset_button = findViewById(R.id.imageButton_reset);
+
+        title_tv.setText(getIntent().getExtras().getString("title"));
 
         text = new Text(getIntent().getExtras().getString("text"));
         text_tv.setText(text.paragraph[0].text);
@@ -51,6 +54,7 @@ public class check_learn_progress extends AppCompatActivity {
             Intent intent = new Intent(this, poem_learn_main.class);
             intent.putExtra("text",text.paragraph[0].text);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_up, 0);
         });
 
     }

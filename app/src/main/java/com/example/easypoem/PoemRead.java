@@ -63,6 +63,7 @@ public class PoemRead extends AppCompatActivity {
             intent.putExtra("title", T_title.getText().toString());
             intent.putExtra("text", T_text.getText().toString());
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_up, 0);
         });
         btn_add.setOnClickListener(v -> {
             if (if_added){

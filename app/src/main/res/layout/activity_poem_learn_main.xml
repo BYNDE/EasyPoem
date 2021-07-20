@@ -38,10 +38,10 @@
                 android:contentDescription="@string/imagebutton_back" />
 
             <TextView
-                android:id="@+id/textViewPoems"
+                android:id="@+id/current_poem_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Название уровня"
+                android:text=""
                 android:layout_weight="1"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
