@@ -64,6 +64,9 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
 
         word_textview.setOnDragListener(dragListener);
 
+        poem_learn_main poem_learn_main= new poem_learn_main();
+        poem_learn_main.getInstance().setName("Drag&Drop");
+
         return view;
     }
     @Override

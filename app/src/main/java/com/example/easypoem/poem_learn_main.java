@@ -39,7 +39,6 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         skip_button.setOnClickListener(this);
         back_button.setOnClickListener(this);
 
-        current_level_tv.setText("Аудиосуфлер");
 
         String current_text = getIntent().getExtras().getString("text");
         Bundle bundle = new Bundle();
@@ -86,5 +85,8 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_down, 0);
+    }
+    public void setName(String name){
+        current_level_tv.setText(name);
     }
 }
