@@ -25,9 +25,9 @@ public class Text implements Serializable {
         this.text = text;
         words = text.split("\\b");
         lines = text.split("\\n+");
-        if (getLengthParagraphsIsOne() == 1 && getLengthParagraphsIsTwo() != 1) {
-            String[] tempParagraph = new String[getLengthParagraphsIsTwo()];
-            paragraph = new Paragraph[getLengthParagraphsIsTwo()];
+        if (getLengthParagraphs() != 1 && linearSearch(lines, " ") == -1) {
+            String[] tempParagraph = new String[getLengthParagraphs()];
+            paragraph = new Paragraph[getLengthParagraphs()];
             tempParagraph[0] = "";
 
             double src = lines.length / 5;
@@ -39,9 +39,9 @@ public class Text implements Serializable {
 
             int i = 0;
             int j = 0;
-            while (i < getLengthParagraphsIsTwo() - 1) {
+            while (i < getLengthParagraphs() - 1) {
                 tempParagraph[i] += lines[j++] + "\n";
-                if (i+1 == getLengthParagraphsIsTwo() - 1) {
+                if (i+1 == getLengthParagraphs() - 1) {
                     if (j == 4 + answer) {
                         j = 5;
                         paragraph[i] = new Paragraph(tempParagraph[i++]);
@@ -55,13 +55,13 @@ public class Text implements Serializable {
                     }
                 }
             }
-            countLevels = getLengthParagraphsIsTwo();
-        } else if (getLengthParagraphsIsOne() == 1 && getLengthParagraphsIsTwo() == 1) {
+            countLevels = getLengthParagraphs();
+        } else if (getLengthParagraphs() == 1) {
             paragraph[0] = new Paragraph(text);
             countLevels = 1;
         } else {
-            String[] tempParagraph = new String[getLengthParagraphsIsOne()];
-            paragraph = new Paragraph[getLengthParagraphsIsOne()];
+            String[] tempParagraph = new String[getLengthParagraphs()];
+            paragraph = new Paragraph[getLengthParagraphs()];
             tempParagraph[0] = "";
             int j = 0;
             for (int i = 0; i < lines.length; i++) {
@@ -72,16 +72,61 @@ public class Text implements Serializable {
                 }
                 tempParagraph[j] += lines[i] + "\n";
             }
-            countLevels = getLengthParagraphsIsOne();
+            countLevels = getLengthParagraphs();
         }
     }
-    public int getLengthParagraphsIsOne() {
+
+    public int linearSearch(String arr[], String elementToSearch) {
+
+        for (int index = 0; index < arr.length; index++) {
+            if (arr[index] == elementToSearch)
+                return index;
+        }
+        return -1;
+    }
+
+    public int getLengthParagraphs() {
         int j = 1;
         for (int i = 0; i < lines.length ; i++) {
             if (lines[i].equals(" "))
                 j++;
         }
-        return j;
+
+        if (j == 1) {
+            double src = lines.length / 5;
+            int res = (int)src; //целая часть
+            double answer = src - res;
+            if (lines.length == 5) {
+                return lines.length;
+            } else if (answer == 0 || answer < 0.5f) {
+                return lines.length / 5;
+            } else if (answer != 0 && answer >= 0.5f) {
+                return lines.length / 5 + 1;
+            }
+            return 1;
+        } else return j;
+    }
+
+    public int getLengthParagraphs(String lines[]) {
+        int j = 1;
+        for (int i = 0; i < lines.length ; i++) {
+            if (lines[i].equals(" "))
+                j++;
+        }
+
+        if (j == 1) {
+            double src = lines.length / 5;
+            int res = (int)src; //целая часть
+            double answer = src - res;
+            if (lines.length == 5) {
+                return lines.length;
+            } else if (answer == 0 || answer < 0.5f) {
+                return lines.length / 5;
+            } else if (answer != 0 && answer >= 0.5f) {
+                return lines.length / 5 + 1;
+            }
+            return 1;
+        } else return j;
     }
 
     public Paragraph getParagraph() {
@@ -94,18 +139,6 @@ public class Text implements Serializable {
         return paragraph[level++];
     }
 
-    public int getLengthParagraphsIsTwo() {
-        double src = lines.length / 5;
-        int res = (int)src; //целая часть
-        double answer = src - res;
-
-        if (answer == 0 || answer < 0.5f) {
-            return lines.length / 5;
-        } else if (answer != 0 && answer >= 0.5f) {
-            return lines.length / 5 + 1;
-        }
-        return 1;
-    }
 
     public void setText(String text) {
         this.text = text;
