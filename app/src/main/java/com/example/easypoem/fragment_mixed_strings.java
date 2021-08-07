@@ -75,7 +75,7 @@ public class fragment_mixed_strings extends Fragment {
 
             if (recyclerAdapter.moviesList.equals(Arrays.asList(text.lines))) {
                 poem_learn_main poem_learn_main= new poem_learn_main();
-                poem_learn_main.getInstance().go_to_check_progress();
+                com.example.easypoem.poem_learn_main.getInstance().go_to_check_progress();
             }
 
             return true;

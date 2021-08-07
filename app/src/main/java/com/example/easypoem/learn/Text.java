@@ -57,6 +57,7 @@ public class Text implements Serializable {
             }
             countLevels = getLengthParagraphs();
         } else if (getLengthParagraphs() == 1) {
+            paragraph = new Paragraph[getLengthParagraphs()];
             paragraph[0] = new Paragraph(text);
             countLevels = 1;
         } else {
