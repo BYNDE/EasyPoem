@@ -97,7 +97,9 @@ public class Text implements Serializable {
             double src = lines.length / 5;
             int res = (int)src; //целая часть
             double answer = src - res;
-            if (lines.length == 5) {
+            if (lines.length < 5) {
+                return 1;
+            }else if (lines.length == 5) {
                 return lines.length;
             } else if (answer == 0 || answer < 0.5f) {
                 return lines.length / 5;
