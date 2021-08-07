@@ -1,6 +1,8 @@
 package com.example.easypoem;
 
+
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.easypoem.learn.Paragraph;
 import com.example.easypoem.learn.Text;
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
@@ -33,36 +36,29 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     word_item_adapter adapter;
     View entered_word;
     Text text;
+    Paragraph paragraph;
     ArrayList<String> words = new ArrayList<>();
     TextView selectTextView;
     FlexboxLayout flexboxLayout;
+    View view;
+    int level = 0;
+    int countLevels = 5;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_drag_and_drop, container, false);
+        view = inflater.inflate(R.layout.fragment_drag_and_drop, container, false);
 
         words_recycler = view.findViewById(R.id.words_recycler);
         flexboxLayout = view.findViewById(R.id.flex_layout);
         text = new Text(this.getArguments().getString("text"));
-
-
-        FlexboxLayoutManager manager = new FlexboxLayoutManager(getActivity());
-        manager.setFlexDirection(FlexDirection.ROW);
-        manager.setFlexWrap(FlexWrap.WRAP);
-        manager.setJustifyContent(JustifyContent.CENTER);
-        manager.setAlignItems(AlignItems.CENTER);
+        paragraph = text.getParagraph();
+        if (paragraph == null) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
 
         selectword();
-
-        adapter = new word_item_adapter(getActivity(), words,this);
-        words_recycler.setLayoutManager(manager);
-
-        words_recycler.setAdapter(adapter);
-
-        word_textview = view.findViewById(R.id.word);
-
-        word_textview.setOnDragListener(dragListener);
 
         poem_learn_main poem_learn_main= new poem_learn_main();
         poem_learn_main.getInstance().setName("Drag&Drop");
@@ -80,14 +76,22 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     }
 
     public void selectword() {
+        if (level == countLevels) {
+            // ... Выполняется при завершений уровня
+//            // ! Желатель сразу перейти на следуйщий уровень
+            poem_learn_main poem_learn_main= new poem_learn_main();
+            poem_learn_main.getInstance().go_to_check_progress();
+            return;
+        }
+        level++;
         flexboxLayout.removeAllViews();
         words.clear();
-        int selectidWord = text.randomWord();
-        text.selectWord(selectidWord);
-        for (int i = 0; i < text.words.length; i++) {
+        int selectidWord = paragraph.randomWord();
+        paragraph.selectWord(selectidWord);
+        for (int i = 0; i < paragraph.words.length; i++) {
             if (i != selectidWord) {
                 TextView textView = new TextView(getActivity());
-                textView.setText(text.words[i]);
+                textView.setText(paragraph.words[i]);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextSize(25);
                 flexboxLayout.addView(textView);
@@ -102,10 +106,26 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
             }
         }
 
-        words.add(text.selectedWord);
-        words.add(text.words[text.randomWord()]);
-        words.add(text.words[text.randomWord()]);
+        words.add(paragraph.selectedWord);
+        words.add(paragraph.words[paragraph.randomWord()]);
+        words.add(paragraph.words[paragraph.randomWord()]);
         Collections.shuffle(words);
+
+
+        FlexboxLayoutManager manager = new FlexboxLayoutManager(getActivity());
+        manager.setFlexDirection(FlexDirection.ROW);
+        manager.setFlexWrap(FlexWrap.WRAP);
+        manager.setJustifyContent(JustifyContent.CENTER);
+        manager.setAlignItems(AlignItems.CENTER);
+
+        adapter = new word_item_adapter(getActivity(), words,this);
+        words_recycler.setLayoutManager(manager);
+
+        words_recycler.setAdapter(adapter);
+
+        word_textview = view.findViewById(R.id.word);
+
+        word_textview.setOnDragListener(dragListener);
     }
 
     View.OnDragListener dragListener = new View.OnDragListener() {
@@ -122,9 +142,6 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
                     word_correct = true;
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
-                    if (!word_textview.getText().toString().equals("_______")) {
-                        words.add(word_textview.getText().toString());
-                    }
                     if (word_correct){
                         words.remove(word_entered_text);
                         words_recycler.setAdapter(adapter);
@@ -132,7 +149,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
                         entered_word.setVisibility(View.VISIBLE);
                     }
                     word_correct = false;
-                    if (word_textview.getText().toString().equals(text.selectedWord))
+                    if (word_textview.getText().toString().equals(paragraph.selectedWord))
                         selectword();
                     break;
             }

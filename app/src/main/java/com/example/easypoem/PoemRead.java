@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easypoem.learn.Text;
 import com.example.easypoem.sqlite.MyDbManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,7 +23,6 @@ public class PoemRead extends AppCompatActivity {
         Drawable img_added = ContextCompat.getDrawable(this, R.drawable.ic_button_delete_24);
         btn_add.setCompoundDrawablesWithIntrinsicBounds(img_added,null,null,null);
         btn_add.setText("Удалить");
-
     }
 
     @Override
@@ -41,11 +41,15 @@ public class PoemRead extends AppCompatActivity {
         TextView T_author = findViewById(R.id.TV_author);
 
         Button btn_add = findViewById(R.id.BTN_add);
+        Button btn_learn = findViewById(R.id.BTN_learn);
+
+        btn_learn.setEnabled(false);
 
 
        if( myDbManager.check_availability(getIntent().getExtras().getString("title"),getIntent().getExtras().getString("author"))){
            if_added = true;
            change_add_button(btn_add);
+           btn_learn.setEnabled(true);
        }
 
         T_title.setText(getIntent().getExtras().getString("title"));
@@ -58,10 +62,11 @@ public class PoemRead extends AppCompatActivity {
             overridePendingTransition(R.anim.slide_in_down, 0);
         });
 
-        findViewById(R.id.BTN_learn).setOnClickListener(v -> {
+        btn_learn.setOnClickListener(v -> {
             Intent intent = new Intent(this, check_learn_progress.class);
             intent.putExtra("title", T_title.getText().toString());
             intent.putExtra("text", T_text.getText().toString());
+            intent.putExtra("author",T_author.getText().toString());
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_up, 0);
         });
@@ -74,10 +79,13 @@ public class PoemRead extends AppCompatActivity {
 
             }
             else{
+                Text text1 = new Text(getIntent().getExtras().getString("text"));
+                int paragraphs_number = text1.getLengthParagraphs();
                 myDbManager.insertToDb(getIntent().getExtras().getString("title"),
                         getIntent().getExtras().getString("author"),
-                        getIntent().getExtras().getString("text"),0);
+                        getIntent().getExtras().getString("text"),0,paragraphs_number);
                 change_add_button(btn_add);
+                btn_learn.setEnabled(true);
                 if_added = true;
             }
 

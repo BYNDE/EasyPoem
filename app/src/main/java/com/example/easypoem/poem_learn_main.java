@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.easypoem.learn.Text;
+import com.example.easypoem.sqlite.MyDbManager;
 
 public class poem_learn_main extends AppCompatActivity implements View.OnClickListener{
     private FrameLayout fragment_layout;
@@ -21,6 +23,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     private ProgressBar progressBar;
     private Fragment last_fragment;
     private ImageButton skip_button,back_button;
+    private String text,title;
 
 
     @Override
@@ -28,7 +31,6 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_learn_main);
         getSupportActionBar().hide();
-
         instance = this;
         fragment_layout = findViewById(R.id.fragment);
         progressBar = findViewById(R.id.progressBar);
@@ -40,16 +42,27 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         back_button.setOnClickListener(this);
 
 
-        String current_text = getIntent().getExtras().getString("text");
+        text = getIntent().getExtras().getString("text");
         Bundle bundle = new Bundle();
-        bundle.putString("text", current_text );
+        bundle.putString("text", text );
 
-        fragment_learn_record fragment_learn_record = new fragment_learn_record();
-        fragment_learn_record.setArguments(bundle);
+        int current_level = getIntent().getExtras().getInt("level");
+
+        if (current_level == 0){
+            fragment_mixed_strings fragment_mixed_strings= new fragment_mixed_strings();
+            fragment_mixed_strings.setArguments(bundle);
+            replace_fragment(fragment_mixed_strings);
+        }else if (current_level == 1){
+            fragment_learn_record fragment_learn_record= new fragment_learn_record();
+            fragment_learn_record.setArguments(bundle);
+            replace_fragment(fragment_learn_record);
+        }else{
+            fragment_drag_and_drop fragment_drag_and_drop= new fragment_drag_and_drop();
+            fragment_drag_and_drop.setArguments(bundle);
+            replace_fragment(fragment_drag_and_drop);
+        }
 
 
-        replace_fragment(fragment_learn_record);
-        progressBar.setProgress(50);
 
 
     }
@@ -88,5 +101,23 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     }
     public void setName(String name){
         current_level_tv.setText(name);
+    }
+
+    public void go_to_check_progress(){
+        MyDbManager myDbManager = new MyDbManager(this);
+        myDbManager.openDb();
+
+        myDbManager.update_level(getIntent().getExtras().getString("title"),getIntent().getExtras().getString("author"),
+                getIntent().getExtras().getInt("level"),getIntent().getExtras().getInt("paragraph"));
+
+        myDbManager.closeDb();
+
+
+        Intent intent = new Intent(this, check_learn_progress.class);
+        intent.putExtra("title", getIntent().getExtras().getString("title"));
+        intent.putExtra("text", getIntent().getExtras().getString("text_all"));
+        intent.putExtra("author", getIntent().getExtras().getString("author"));
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_up, 0);
     }
 }

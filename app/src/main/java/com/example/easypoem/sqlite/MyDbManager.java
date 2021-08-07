@@ -27,16 +27,31 @@ public class MyDbManager {
     public void openDb(){
         db = myDbHelper.getWritableDatabase();
     }
-    public void insertToDb(String title,String author,String text,int added_or_created){
+    public void insertToDb(String title,String author,String text,int added_or_created, int paragraphs_number){
         ContentValues cv = new ContentValues();
         cv.put(MyConstant.TITLE,title);
         cv.put(MyConstant.AUTHOR,author);
         cv.put(MyConstant.TEXT,text);
         cv.put(MyConstant.ADDED_OR_CREATED,added_or_created);
         cv.put(MyConstant.LEARNED,0);
+        cv.put(MyConstant.PARAGRAPHS_NUMBER,paragraphs_number);
+        cv.put(MyConstant.CURRENT_PARAGRAPH,0);
+        cv.put(MyConstant.CURRENT_LEVEL,0);
 
         db.insert(MyConstant.TABLE_NAME,null,cv);
     }
+    public void update_level(String title, String author, int current_level, int current_paragraph){
+        ContentValues newValues = new ContentValues();
+        if (current_level == 2 ){
+            newValues.put(MyConstant.CURRENT_LEVEL, 0);
+            newValues.put(MyConstant.CURRENT_PARAGRAPH, current_paragraph+1);
+        }else{
+            newValues.put(MyConstant.CURRENT_LEVEL, current_level + 1);
+        }
+
+        db.update(MyConstant.TABLE_NAME, newValues, "title = '"+title+"' and author = '"+author+"'", null);
+    }
+
     public String[][] getFromDb(){
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,null,null,null,
         null, null);
@@ -133,6 +148,28 @@ public class MyDbManager {
         else {
             cursor.close();
             return true;
+        }
+    }
+
+    public int[] getParagraph_and_level(String title,String author){
+        int mass[] = new int[3];
+        Cursor cursor = db.query(MyConstant.TABLE_NAME,null,"title = ? and author = ?",new String[] {title,author},null,
+                null, null);
+        if (cursor.getCount() == 0) {
+            cursor.close();
+            return  null;
+        }
+        else {
+            while(cursor.moveToNext()){
+                int current_level = cursor.getInt(cursor.getColumnIndex(MyConstant.CURRENT_LEVEL));
+                int current_paragraph = cursor.getInt(cursor.getColumnIndex(MyConstant.CURRENT_PARAGRAPH));
+                int paragraphs_number = cursor.getInt(cursor.getColumnIndex(MyConstant.PARAGRAPHS_NUMBER));
+                mass[0] = current_level;
+                mass[1] = current_paragraph;
+                mass[2] = paragraphs_number;
+            }
+            cursor.close();
+            return mass;
         }
     }
     public void closeDb(){

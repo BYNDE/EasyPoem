@@ -126,13 +126,8 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                Bundle bundle = new Bundle();
-                bundle.putString("text", current_text);
                 poem_learn_main poem_learn_main= new poem_learn_main();
-                fragment_drag_and_drop fragment_drag_and_drop = new fragment_drag_and_drop();
-                fragment_drag_and_drop.setArguments(bundle);
-                poem_learn_main.getInstance().replace_fragment(fragment_drag_and_drop);
-                poem_learn_main.getInstance().set_progress(0);
+                poem_learn_main.getInstance().go_to_check_progress();
             }
         });
     }
