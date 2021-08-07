@@ -25,7 +25,7 @@ public class Text implements Serializable {
         this.text = text;
         words = text.split("\\b");
         lines = text.split("\\n+");
-        if (getLengthParagraphs() != 1 && linearSearch(lines, " ") == -1) {
+        if (getLengthParagraphs() != 1 && linearSearch() == 1) {
             String[] tempParagraph = new String[getLengthParagraphs()];
             paragraph = new Paragraph[getLengthParagraphs()];
             tempParagraph[0] = "";
@@ -76,13 +76,14 @@ public class Text implements Serializable {
         }
     }
 
-    public int linearSearch(String arr[], String elementToSearch) {
-
-        for (int index = 0; index < arr.length; index++) {
-            if (arr[index] == elementToSearch)
-                return index;
+    public int linearSearch() {
+        int j = 1;
+        for (int i = 0; i < lines.length ; i++) {
+            if (lines[i].equals(" "))
+                j++;
         }
-        return -1;
+
+        return j;
     }
 
     public int getLengthParagraphs() {

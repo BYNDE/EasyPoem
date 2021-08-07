@@ -38,7 +38,8 @@ public class check_learn_progress extends AppCompatActivity {
         MyDbManager myDbManager = new MyDbManager(this);
         myDbManager.openDb();
 
-        int[] current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title"),getIntent().getExtras().getString("author"));
+        int[] current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title")
+                ,getIntent().getExtras().getString("author"));
 
         myDbManager.closeDb();
         text = new Text(getIntent().getExtras().getString("text"));

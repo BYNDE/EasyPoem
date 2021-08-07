@@ -155,11 +155,11 @@ public class MyDbManager {
         int mass[] = new int[3];
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,"title = ? and author = ?",new String[] {title,author},null,
                 null, null);
+        cursor.moveToFirst();
         if (cursor.getCount() == 0) {
             cursor.close();
             return  null;
-        }
-        else {
+        } else {
             while(cursor.moveToNext()){
                 int current_level = cursor.getInt(cursor.getColumnIndex(MyConstant.CURRENT_LEVEL));
                 int current_paragraph = cursor.getInt(cursor.getColumnIndex(MyConstant.CURRENT_PARAGRAPH));
