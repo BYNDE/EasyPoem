@@ -155,7 +155,7 @@ public class MyDbManager {
         int mass[] = new int[3];
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,"title = ? and author = ?",new String[] {title,author},null,
                 null, null);
-        cursor.moveToFirst();
+
         if (cursor.getCount() == 0) {
             cursor.close();
             return  null;

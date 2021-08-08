@@ -43,7 +43,7 @@ public class check_learn_progress extends AppCompatActivity {
 
         myDbManager.closeDb();
         text = new Text(getIntent().getExtras().getString("text"));
-        text_tv.setText(text.paragraph[0].text);
+        text_tv.setText(text.paragraph[current_mass[1]].text);
 
 
         progressBar.setMax(10000);
@@ -65,7 +65,7 @@ public class check_learn_progress extends AppCompatActivity {
 
         findViewById(R.id.button_continue).setOnClickListener(v -> {
             Intent intent = new Intent(this, poem_learn_main.class);
-            intent.putExtra("text",text.paragraph[0].text);
+            intent.putExtra("text",text.paragraph[current_mass[1]].text);
             intent.putExtra("level",current_mass[0]);
             intent.putExtra("paragraph",current_mass[1]);
             intent.putExtra("title",getIntent().getExtras().getString("title"));
