@@ -52,6 +52,14 @@ public class MyDbManager {
         db.update(MyConstant.TABLE_NAME, newValues, "title = '"+title+"' and author = '"+author+"'", null);
     }
 
+    public void reset (String title,String author){
+        ContentValues newValues = new ContentValues();
+        newValues.put(MyConstant.CURRENT_LEVEL, 0);
+        newValues.put(MyConstant.CURRENT_PARAGRAPH, 0);
+        newValues.put(MyConstant.LEARNED, 0);
+        db.update(MyConstant.TABLE_NAME, newValues, "title = '"+title+"' and author = '"+author+"'", null);
+    }
+
     public String[][] getFromDb(){
         Cursor cursor = db.query(MyConstant.TABLE_NAME,null,null,null,null,
         null, null);

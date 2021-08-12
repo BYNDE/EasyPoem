@@ -57,9 +57,10 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
             fragment_learn_record.setArguments(bundle);
             replace_fragment(fragment_learn_record);
         }else{
-            fragment_drag_and_drop fragment_drag_and_drop= new fragment_drag_and_drop();
-            fragment_drag_and_drop.setArguments(bundle);
-            replace_fragment(fragment_drag_and_drop);
+//            fragment_drag_and_drop fragment_drag_and_drop= new fragment_drag_and_drop();
+//            fragment_drag_and_drop.setArguments(bundle);
+//            replace_fragment(fragment_drag_and_drop);
+            go_to_check_progress();
         }
 
 
@@ -84,7 +85,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton_skip:
-
+                    go_to_check_progress();
                 break;
 
             case R.id.imageButton_back:

@@ -18,7 +18,10 @@ public class check_learn_progress extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView text_tv, title_tv,progress_tv;
     private ImageButton reset_button, back_button;
+    private int[] current_mass;
     private Text text;
+    private int progress;
+    private MyDbManager myDbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,28 +38,33 @@ public class check_learn_progress extends AppCompatActivity {
 
         title_tv.setText(getIntent().getExtras().getString("title"));
 
-        MyDbManager myDbManager = new MyDbManager(this);
-        myDbManager.openDb();
-
-        int[] current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title")
-                ,getIntent().getExtras().getString("author"));
-
-        myDbManager.closeDb();
-        text = new Text(getIntent().getExtras().getString("text"));
-        text_tv.setText(text.paragraph[current_mass[1]].text);
-
-
         progressBar.setMax(10000);
 
-        int progress = (int) Math.ceil(((Double.valueOf(current_mass[0]) + Double.valueOf(current_mass[1] * 3)) / (Double.valueOf(current_mass[2])*3))*100);
-        progress_tv.setText(Integer.toString(progress));
 
-        updateRunnable(progress*100);
+        myDbManager = new MyDbManager(this);
+        myDbManager.openDb();
+
+        set_values();
+
+        myDbManager.closeDb();
+
+
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 back();
+            }
+        });
+
+        reset_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDbManager.openDb();
+                myDbManager.reset(getIntent().getExtras().getString("title")
+                        ,getIntent().getExtras().getString("author"));
+                set_values();
+                myDbManager.closeDb();
             }
         });
 
@@ -82,6 +90,16 @@ public class check_learn_progress extends AppCompatActivity {
         animation.setDuration(1100);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
+    }
+
+    private  void set_values(){
+        current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title")
+                ,getIntent().getExtras().getString("author"));
+        text = new Text(getIntent().getExtras().getString("text"));
+        text_tv.setText(text.paragraph[current_mass[1]].text);
+        progress = (int) Math.ceil(((Double.valueOf(current_mass[0]) + Double.valueOf(current_mass[1] * 3)) / (Double.valueOf(current_mass[2])*3))*100);
+        progress_tv.setText(Integer.toString(progress));
+        updateRunnable(progress*100);
     }
 
     @Override
