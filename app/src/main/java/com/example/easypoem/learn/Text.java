@@ -69,6 +69,7 @@ public class Text implements Serializable {
                     tempParagraph[j] += lines[i] + "\n";
                 }
             }
+            paragraph[j] = new Paragraph(tempParagraph[j]);
             countLevels = getLengthParagraphs();
         }
     }
