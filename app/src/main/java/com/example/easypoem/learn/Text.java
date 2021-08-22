@@ -1,12 +1,6 @@
 package com.example.easypoem.learn;
 
-import android.content.Intent;
-import android.util.Log;
-
-import com.example.easypoem.check_learn_progress;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Text implements Serializable {

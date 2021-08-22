@@ -63,7 +63,7 @@ public class PoemRead extends AppCompatActivity {
         });
 
         btn_learn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, check_learn_progress.class);
+            Intent intent = new Intent(this, poem_learn_main.class);
             intent.putExtra("title", T_title.getText().toString());
             intent.putExtra("text", T_text.getText().toString());
             intent.putExtra("author",T_author.getText().toString());
