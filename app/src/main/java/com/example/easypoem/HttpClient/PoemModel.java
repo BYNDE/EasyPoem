@@ -21,6 +21,14 @@ public class PoemModel {
     @Expose
     private String author;
 
+    public PoemModel(String title, String author,String text, Integer id) {
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.author = author;
+    }
+
+
     public Integer getId() {
         return id;
     }

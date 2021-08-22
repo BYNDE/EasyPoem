@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.easypoem.HttpClient.PoemModel;
 import com.example.easypoem.sqlite.MyDbManager;
 
 import java.util.ArrayList;
 
 public class see_all_my_poems extends AppCompatActivity implements search_output_item_adapter.OnNoteListener, View.OnClickListener {
     private MyDbManager myDbManager = new MyDbManager(this);
-    ArrayList<search_output> states = new ArrayList<search_output>();
+    ArrayList<PoemModel> states = new ArrayList<PoemModel>();
     private Button button_all,button_added,button_created,button_learned,current_button;
     private ImageButton add_button,back_button;
     private RecyclerView recyclerView;
@@ -51,7 +52,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         String [][] mass = myDbManager.getFromDb();
         if (mass.length>0){
             for (int i = 0; i < mass.length; i++) {
-                states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
+                states.add(new PoemModel(mass[i][0], mass[i][1], mass[i][2], Integer.valueOf(mass[i][3])));
             }
         }
         myDbManager.closeDb();
@@ -65,9 +66,9 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
     @Override
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, PoemRead.class);
-        intent.putExtra("title", states.get(position).title);
-        intent.putExtra("text", states.get(position).text);
-        intent.putExtra("author", states.get(position).author);
+        intent.putExtra("title", states.get(position).getTitle());
+        intent.putExtra("text", states.get(position).getText());
+        intent.putExtra("author", states.get(position).getAuthor());
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
@@ -85,7 +86,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                 mass = myDbManager.getFromDb();
                 if (mass.length>0){
                     for (int i = 0; i < mass.length; i++) {
-                        states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
+                        states.add(new PoemModel(mass[i][0], mass[i][1], mass[i][2], Integer.valueOf(mass[i][3])));
                     }
                 }
             break;
@@ -97,7 +98,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                 mass = myDbManager.getAddedOrCreatedFromDb(0);
                 if (mass.length>0){
                     for (int i = 0; i < mass.length; i++) {
-                        states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
+                        states.add(new PoemModel(mass[i][0], mass[i][1], mass[i][2], Integer.valueOf(mass[i][3])));
                     }
                 }
             break;
@@ -109,7 +110,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                 mass = myDbManager.getAddedOrCreatedFromDb(1);
                 if (mass.length>0){
                     for (int i = 0; i < mass.length; i++) {
-                        states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
+                        states.add(new PoemModel(mass[i][0], mass[i][1], mass[i][2], Integer.valueOf(mass[i][3])));
                     }
                 }
             break;
@@ -121,7 +122,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
                 mass = myDbManager.getLearnedFromDb();
                 if (mass.length>0){
                     for (int i = 0; i < mass.length; i++) {
-                        states.add(new search_output(mass[i][0], mass[i][1], mass[i][2], Long.valueOf(mass[i][3])));
+                        states.add(new PoemModel(mass[i][0], mass[i][1], mass[i][2], Integer.valueOf(mass[i][3])));
                     }
                 }
             break;

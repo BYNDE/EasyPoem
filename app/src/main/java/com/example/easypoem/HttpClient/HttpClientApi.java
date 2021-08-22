@@ -9,4 +9,6 @@ import retrofit2.http.Path;
 public interface HttpClientApi {
     @GET("api/poems/title/{title}")
     Call<List<PoemModel>> Search(@Path("title") String title);
+
+    @GET("api/authors/")
 }

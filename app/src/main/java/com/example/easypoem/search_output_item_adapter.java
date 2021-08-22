@@ -8,15 +8,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.easypoem.HttpClient.PoemModel;
+
 import java.util.List;
 
 public class search_output_item_adapter  extends RecyclerView.Adapter<search_output_item_adapter.ViewHolder>{
 
     private final LayoutInflater inflater;
-    private final List<search_output> states;
+    private final List<PoemModel> states;
     private OnNoteListener onNoteListener;
 
-    search_output_item_adapter(Context context, List<search_output> states, OnNoteListener onNoteListener) {
+    search_output_item_adapter(Context context, List<PoemModel> states, OnNoteListener onNoteListener) {
         this.states = states;
         this.inflater = LayoutInflater.from(context);
         this.onNoteListener = onNoteListener;
@@ -29,9 +31,9 @@ public class search_output_item_adapter  extends RecyclerView.Adapter<search_out
 
     @Override
     public void onBindViewHolder(search_output_item_adapter.ViewHolder holder, int position) {
-        search_output state = states.get(position);
-        holder.titleView.setText(state.title);
-        holder.authorView.setText(state.author);
+        PoemModel state = states.get(position);
+        holder.titleView.setText(state.getTitle());
+        holder.authorView.setText(state.getAuthor());
 
     }
 

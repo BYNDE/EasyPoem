@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 
 public class search_activity extends AppCompatActivity implements search_output_item_adapter.OnNoteListener{
-    ArrayList<search_output> states = new ArrayList<search_output>();
+    ArrayList<PoemModel> states = new ArrayList<PoemModel>();
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -74,7 +74,8 @@ public class search_activity extends AppCompatActivity implements search_output_
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(final String query) {
+            public boolean onQueryTextSubmit(final String newText) {
+                search(newText, adapter);
                 return false;
             }
 
@@ -117,21 +118,39 @@ public class search_activity extends AppCompatActivity implements search_output_
     }
 
     public void search(String newText,search_output_item_adapter adapter){
-        firebase_poems_search(newText);
-        adapter.notifyDataSetChanged();
+        firebase_poems_search(newText, adapter);
     }
 
-    private void firebase_poems_search(String str){
+    private void server_poems_search(String str, search_output_item_adapter adapter) {
+        states.clear();
+
+        HttpClient.getApi().Search(str).enqueue(new Callback<List<PoemModel>>() {
+            @Override
+            public void onResponse(Call<List<PoemModel>> call, Response<List<PoemModel>> response) {
+                states.addAll(response.body());
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<PoemModel>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void firebase_poems_search(String str, search_output_item_adapter adapter){
         states.clear();
         // Obtain the FirebaseAnalytics instance.
+
         if (str.length() >= 3) {
             Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(5);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                        search_output value = ds.getValue(search_output.class);
+                        PoemModel value = ds.getValue(PoemModel.class);
                         states.add(value);
+                        adapter.notifyDataSetChanged();
                     }
                 }
 
@@ -147,9 +166,9 @@ public class search_activity extends AppCompatActivity implements search_output_
     @Override
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, PoemRead.class);
-        intent.putExtra("title", states.get(position).title);
-        intent.putExtra("text", states.get(position).text);
-        intent.putExtra("author", states.get(position).author);
+        intent.putExtra("title", states.get(position).getTitle());
+        intent.putExtra("text", states.get(position).getText());
+        intent.putExtra("author", states.get(position).getAuthor());
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_down, 0);
     }
