@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,8 @@ import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +48,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     int countLevels = 5;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_drag_and_drop, container, false);
 
@@ -76,9 +79,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     }
 
     public void selectword() {
-        if (level == countLevels) {
-            // ... Выполняется при завершений уровня
-//            // ! Желатель сразу перейти на следуйщий уровень
+        if (level == text.countLevels) {
             poem_learn_main poem_learn_main= new poem_learn_main();
             poem_learn_main.getInstance().go_to_check_progress();
             return;
@@ -100,7 +101,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
                 selectTextView.setText("_______");
                 selectTextView.setGravity(Gravity.CENTER);
                 selectTextView.setTextSize(25);
-                selectTextView.setBackground(getActivity().getDrawable(R.drawable.border_word));
+                selectTextView.setBackground(ContextCompat.getDrawable(getContext() ,R.drawable.border_word));
                 selectTextView.setId(R.id.word);
                 flexboxLayout.addView(selectTextView);
             }
@@ -131,7 +132,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     View.OnDragListener dragListener = new View.OnDragListener() {
         boolean word_correct = false;
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View v, @NotNull DragEvent event) {
             int drag_event = event.getAction();
             switch (drag_event){
                 case DragEvent.ACTION_DRAG_ENTERED:

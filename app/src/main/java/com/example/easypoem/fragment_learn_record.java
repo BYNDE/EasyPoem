@@ -7,6 +7,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -64,7 +65,7 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
                 else{
                     if(check_permission()){
                         startRecording();
-                        record_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_button_stop_40));
+                        record_button.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_button_stop_40));
                         is_recording = !is_recording;
                     }
                 }

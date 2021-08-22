@@ -1,8 +1,10 @@
 package com.example.easypoem;
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -52,11 +54,11 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if (isPlaying){
-            play_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_button_play_40));
+            play_button.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_button_play_40));
             pauseAudio();
         }
         else {
-            play_button.setImageDrawable(getResources().getDrawable(R.drawable.ic_button_pause_40));
+            play_button.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_button_pause_40));
             if (audio_is_launched){
                 resumeAudio();
             }
