@@ -1,11 +1,8 @@
 package com.example.easypoem;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,20 +10,24 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import com.example.easypoem.HttpClient.HttpClient;
+import com.example.easypoem.HttpClient.PoemModel;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class search_activity extends AppCompatActivity implements search_output_item_adapter.OnNoteListener{
@@ -37,6 +38,18 @@ public class search_activity extends AppCompatActivity implements search_output_
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_activity);
+
+//        HttpClient.getApi().Search("Привет").enqueue(new Callback<List<PoemModel>>() {
+//            @Override
+//            public void onResponse(Call<List<PoemModel>> call, Response<List<PoemModel>> response) {
+//                Log.println(Log.ERROR, "HTTPCLIENT", response.body().get(0).getTitle());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PoemModel>> call, Throwable t) {
+//                Log.println(Log.ERROR, "HTTPCLIENT", t.getMessage());
+//            }
+//        });
 
         getSupportActionBar().hide();
 
