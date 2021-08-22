@@ -44,6 +44,8 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     TextView selectTextView;
     FlexboxLayout flexboxLayout;
     View view;
+    int level = 0;
+    int countLevels = 5;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -77,12 +79,12 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     }
 
     public void selectword() {
-        if (text.level == text.countLevels) {
+        if (level == countLevels) {
             poem_learn_main poem_learn_main= new poem_learn_main();
             poem_learn_main.getInstance().go_to_check_progress();
             return;
         }
-        text.level++;
+        level++;
         flexboxLayout.removeAllViews();
         words.clear();
         int selectidWord = paragraph.randomWord();
