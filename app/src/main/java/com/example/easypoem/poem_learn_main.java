@@ -123,7 +123,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title")
                 ,getIntent().getExtras().getString("author"));
         text_all = new Text(getIntent().getExtras().getString("text"));
-        text = text_all.paragraph[2].text;
+        text = text_all.paragraph[current_mass[1]].text;
         progress = (int) Math.ceil(((Double.valueOf(current_mass[0]) + Double.valueOf(current_mass[1] * 3)) / (Double.valueOf(current_mass[2])*3))*100);
         myDbManager.closeDb();
     }
