@@ -2,6 +2,7 @@ package com.example.easypoem;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -65,7 +66,9 @@ public class my_poems extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),see_all_my_poems.class);
-                startActivity(intent);
+                Activity activity = (Activity) getContext();
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
             }
         });
 
@@ -74,7 +77,9 @@ public class my_poems extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),add_my_poem.class);
-                startActivity(intent);
+                Activity activity = (Activity) getContext();
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
             }
         });
 
@@ -85,7 +90,9 @@ public class my_poems extends Fragment {
                 intent.putExtra("title", last_poem_mass[0]);
                 intent.putExtra("author", last_poem_mass[1]);
                 intent.putExtra("text", last_poem_mass[2]);
-                startActivity(intent);
+                Activity activity = (Activity) getContext();
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
             }
         });
 
