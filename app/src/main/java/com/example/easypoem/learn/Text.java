@@ -65,7 +65,9 @@ public class Text implements Serializable {
                     j++;
                     tempParagraph[j] = "";
                 }
-                tempParagraph[j] += lines[i] + "\n";
+                if (!lines[i].equals(" ")) {
+                    tempParagraph[j] += lines[i] + "\n";
+                }
             }
             countLevels = getLengthParagraphs();
         }

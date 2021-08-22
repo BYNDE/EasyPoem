@@ -73,7 +73,7 @@ public class fragment_mixed_strings extends Fragment {
 
             recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
 
-            if (recyclerAdapter.moviesList.equals(Arrays.asList(text.lines))) {
+            if (movelist.equals(Arrays.asList(text.lines))) {
                 poem_learn_main poem_learn_main= new poem_learn_main();
                 poem_learn_main.getInstance().go_to_check_progress();
             }
