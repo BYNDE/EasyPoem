@@ -114,7 +114,7 @@ public class search_activity extends AppCompatActivity implements search_output_
 
     public void back(){
         search_activity.super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     public void search(String newText,search_output_item_adapter adapter){
@@ -170,6 +170,6 @@ public class search_activity extends AppCompatActivity implements search_output_
         intent.putExtra("text", states.get(position).getText());
         intent.putExtra("author", states.get(position).getAuthor());
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 }

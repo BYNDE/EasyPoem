@@ -68,7 +68,7 @@ public class my_poems extends Fragment {
                 Intent intent = new Intent(getActivity(),see_all_my_poems.class);
                 Activity activity = (Activity) getContext();
                 activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
+                activity.overridePendingTransition(0, 0);
             }
         });
 
@@ -79,7 +79,7 @@ public class my_poems extends Fragment {
                 Intent intent = new Intent(getActivity(),add_my_poem.class);
                 Activity activity = (Activity) getContext();
                 activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
+                activity.overridePendingTransition(0, 0);
             }
         });
 
@@ -92,7 +92,7 @@ public class my_poems extends Fragment {
                 intent.putExtra("text", last_poem_mass[2]);
                 Activity activity = (Activity) getContext();
                 activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_in_up);
+                activity.overridePendingTransition(0, 0);
             }
         });
 
@@ -109,52 +109,4 @@ public class my_poems extends Fragment {
     private void check_added() {
 
     }
-
-
-//    private void onAddButtonClicked(FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
-//        setVisibility(clicked,button_new_folder,button_new_poem);
-//        setAnimation(clicked,button_add,button_new_folder,button_new_poem);
-//        setClickable(clicked,button_new_folder,button_new_poem);
-//        clicked = !clicked;
-//    }
-
-//    private void setVisibility(boolean clicked,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
-//        if(!clicked){
-//            button_new_folder.setVisibility(View.VISIBLE);
-//            button_new_poem.setVisibility(View.VISIBLE);
-//
-//        }else{
-//            button_new_folder.setVisibility(View.INVISIBLE);
-//            button_new_poem.setVisibility(View.INVISIBLE);
-//        }
-//    }
-
-//    private void setAnimation(boolean clicked,FloatingActionButton button_add,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem) {
-//
-//        Animation rotate_open = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_open_anim);
-//        Animation rotate_close = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_close_anim);
-//        Animation to_bottom = AnimationUtils.loadAnimation(getActivity(),R.anim.to_bottom_anim);
-//        Animation from_bottom = AnimationUtils.loadAnimation(getActivity(),R.anim.from_bottom_anim);
-//        if(!clicked){
-//            button_new_folder.startAnimation(from_bottom);
-//            button_new_poem.startAnimation(from_bottom);
-//            button_add.startAnimation(rotate_open);
-//        }else{
-//            button_new_folder.startAnimation(to_bottom);
-//            button_new_poem.startAnimation(to_bottom);
-//            button_add.startAnimation(rotate_close);
-//        }
-//    }
-//
-//    private void setClickable(boolean clicked,FloatingActionButton button_new_folder,FloatingActionButton button_new_poem){
-//
-//        if(!clicked) {
-//            button_new_folder.setClickable(true);
-//            button_new_poem.setClickable(true);
-//        }else{
-//            button_new_folder.setClickable(false);
-//            button_new_poem.setClickable(false);
-//        }
-//    }
-
 }

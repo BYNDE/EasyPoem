@@ -18,7 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPoem">
         <activity android:name=".poem_learn_main" />
-        <activity android:name=".drag_and_drop" />
         <activity android:name=".Login_or_register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".see_all_my_poems" />

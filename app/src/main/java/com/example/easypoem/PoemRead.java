@@ -59,7 +59,7 @@ public class PoemRead extends AppCompatActivity {
 
         findViewById(R.id.BTN_back).setOnClickListener(v -> {
             super.onBackPressed();
-            overridePendingTransition(R.anim.slide_in_down, 0);
+            overridePendingTransition(0, 0);
         });
 
         btn_learn.setOnClickListener(v -> {
@@ -68,14 +68,14 @@ public class PoemRead extends AppCompatActivity {
             intent.putExtra("text", T_text.getText().toString());
             intent.putExtra("author",T_author.getText().toString());
             startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_up, 0);
+            overridePendingTransition(0, 0);
         });
         btn_add.setOnClickListener(v -> {
             if (if_added){
                 myDbManager.deleteFromDb(getIntent().getExtras().getString("title"),
                         getIntent().getExtras().getString("author"));
                 super.onBackPressed();
-                overridePendingTransition(R.anim.slide_in_down, 0);
+                overridePendingTransition(0, 0);
 
             }
             else{

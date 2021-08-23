@@ -97,7 +97,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
 
             case R.id.imageButton_back:
                 super.onBackPressed();
-                overridePendingTransition(R.anim.slide_in_down, 0);
+                overridePendingTransition(0, 0);
                 break;
         }
     }
@@ -105,7 +105,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     private  void get_values(){

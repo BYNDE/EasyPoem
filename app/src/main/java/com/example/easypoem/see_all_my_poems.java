@@ -70,7 +70,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
         intent.putExtra("text", states.get(position).getText());
         intent.putExtra("author", states.get(position).getAuthor());
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -130,12 +130,12 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
             case R.id.imageButton_add:
                 Intent intent = new Intent(this,add_my_poem.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_down, 0);
+                overridePendingTransition(0, 0);
             break;
 
             case R.id.imageButton_back:
                 super.onBackPressed();
-                overridePendingTransition(R.anim.slide_in_down, 0);
+                overridePendingTransition(0, 0);
                 break;
         }
         adapter.notifyDataSetChanged();
@@ -145,7 +145,7 @@ public class see_all_my_poems extends AppCompatActivity implements search_output
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     @Override

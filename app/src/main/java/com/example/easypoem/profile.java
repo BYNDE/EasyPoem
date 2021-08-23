@@ -38,6 +38,7 @@ public class profile extends Fragment {
                 mAuth.signOut();
                 Intent intent = new Intent(getActivity(),Login_or_register.class);
                 startActivity(intent);
+
             }
         });
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.easypoem.learn.Text;
 import com.example.easypoem.sqlite.MyDbManager;
@@ -34,12 +35,18 @@ public class add_my_poem extends AppCompatActivity {
                 String title = edit_title.getText().toString();
                 String author = edit_author.getText().toString();
                 String text = edit_text.getText().toString();
-                Text text1 = new Text(text);
-                int paragraphs_number = text1.getLengthParagraphs();
-                myDbManager.insertToDb(title,author,text,1,paragraphs_number);
+                if(title.isEmpty() || author.isEmpty() || text.isEmpty()){
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Заполните все поля!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    Text text1 = new Text(text);
+                    int paragraphs_number = text1.getLengthParagraphs();
+                    myDbManager.insertToDb(title,author,text,1,paragraphs_number);
 
-                Intent intent = new Intent(add_my_poem.this, MainActivity.class);
-                startActivity(intent);
+                    onBackPressed();
+                }
+
             }
         });
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +66,7 @@ public class add_my_poem extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     @Override

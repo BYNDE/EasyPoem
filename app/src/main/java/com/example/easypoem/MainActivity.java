@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private void searchFunction() {
         Intent intent = new Intent(MainActivity.this, search_activity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_up, 0);
+        overridePendingTransition(0, 0);
     }
     @Override
     public void onBackPressed() {
