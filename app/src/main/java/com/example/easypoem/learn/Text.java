@@ -31,24 +31,28 @@ public class Text implements Serializable {
                 answer -= 5;
             }
 
-            int i = 0;
-            int j = 0;
-            while (i < getLengthParagraphs() - 1) {
-                tempParagraph[i] += lines[j++] + "\n";
-                if (i+1 == getLengthParagraphs() - 1) {
-                    if (j == 4 + answer) {
-                        j = 5;
-                        paragraph[i] = new Paragraph(tempParagraph[i++]);
-                        tempParagraph[i] = "";
+
+            int lines_i = 0;
+            int paragraph_i = 0;
+            int i = 1;
+
+            while (paragraph_i < getLengthParagraphs() - 1) {
+                tempParagraph[paragraph_i] += lines[lines_i++] + "\n";
+                i++;
+                if (lines_i + 1 == lines.length - 1) {
+                    if (lines_i == 4 + answer) {
+                        paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i++]);
+                        tempParagraph[paragraph_i] = "";
                     }
                 } else {
-                    if (j == 5) {
-                        j = 0;
-                        paragraph[i] = new Paragraph(tempParagraph[i++]);
-                        tempParagraph[i] = "";
+                    if (i == 5) {
+                        i = 0;
+                        paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i++]);
+                        tempParagraph[paragraph_i] = "";
                     }
                 }
             }
+            paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i]);
             countLevels = getLengthParagraphs();
         } else if (getLengthParagraphs() == 1) {
             paragraph = new Paragraph[getLengthParagraphs()];
