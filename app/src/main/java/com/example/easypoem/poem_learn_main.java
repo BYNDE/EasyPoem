@@ -91,17 +91,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
                     if (button_is_skip){
                         go_to_check_progress();
                     }else{
-                        myDbManager.openDb();
-                        myDbManager.reset(getIntent().getExtras().getString("title")
-                                ,getIntent().getExtras().getString("author"));
-                        get_values();
-                        bundle = new Bundle();
-                        bundle.putString("text", text);
-                        bundle.putInt("progress",0);
-                        check_progress_fragment check_progress_fragment= new check_progress_fragment();
-                        check_progress_fragment.setArguments(bundle);
-                        replace_fragment(check_progress_fragment);
-                        myDbManager.closeDb();
+                       restart_study();
                     }
                 break;
 
@@ -123,7 +113,12 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         current_mass = myDbManager.getParagraph_and_level(getIntent().getExtras().getString("title")
                 ,getIntent().getExtras().getString("author"));
         text_all = new Text(getIntent().getExtras().getString("text"));
-        text = text_all.paragraph[current_mass[1]].text;
+        if (current_mass[1] >= current_mass[2]){
+            text = text_all.paragraph[current_mass[1]-1].text;
+        }else{
+            text = text_all.paragraph[current_mass[1]].text;
+        }
+
         progress = (int) Math.ceil(((Double.valueOf(current_mass[0]) + Double.valueOf(current_mass[1] * 3)) / (Double.valueOf(current_mass[2])*3))*100);
         myDbManager.closeDb();
     }
@@ -138,7 +133,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         myDbManager.openDb();
 
         myDbManager.update_level(getIntent().getExtras().getString("title"),getIntent().getExtras().getString("author"),
-                current_mass[0],current_mass[1]);
+                current_mass[0],current_mass[1],current_mass[2]);
 
         myDbManager.closeDb();
 
@@ -157,6 +152,19 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         check_progress_fragment.setArguments(bundle);
         replace_fragment(check_progress_fragment);
 
+    }
+    public void restart_study(){
+        myDbManager.openDb();
+        myDbManager.reset(getIntent().getExtras().getString("title")
+                ,getIntent().getExtras().getString("author"));
+        get_values();
+        bundle = new Bundle();
+        bundle.putString("text", text);
+        bundle.putInt("progress",0);
+        check_progress_fragment check_progress_fragment= new check_progress_fragment();
+        check_progress_fragment.setArguments(bundle);
+        replace_fragment(check_progress_fragment);
+        myDbManager.closeDb();
     }
     public void go_to_level(){
         progressBar.setVisibility(View.VISIBLE);

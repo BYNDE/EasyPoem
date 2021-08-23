@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,12 +22,10 @@ import com.example.easypoem.sqlite.MyDbManager;
 public class check_progress_fragment extends Fragment {
 
     private ProgressBar progressBar;
-    private TextView text_tv, title_tv,progress_tv;
-    private ImageButton reset_button, back_button;
-    private int[] current_mass;
-    private Text text;
+    private TextView text_tv,progress_tv;
     private int progress;
-    private MyDbManager myDbManager;
+    private Button continue_button;
+    private boolean progress_is_100 = false;
 
 
     @Override
@@ -37,6 +36,7 @@ public class check_progress_fragment extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
         text_tv = view.findViewById(R.id.TV_text);
         progress_tv = view.findViewById(R.id.myTextProgress);
+        continue_button = view.findViewById(R.id.button_continue);
 
         progressBar.setMax(10000);
 
@@ -45,14 +45,24 @@ public class check_progress_fragment extends Fragment {
         progress_tv.setText(Integer.toString(progress));
         updateRunnable(progress*100);
 
+        if(progress == 100){
+            continue_button.setText("Перезапустить");
+            progress_is_100 = true;
+        }
 
 
 
 
 
-        view.findViewById(R.id.button_continue).setOnClickListener(v -> {
-            poem_learn_main poem_learn_main= new poem_learn_main();
-            poem_learn_main.getInstance().go_to_level();
+
+        continue_button.setOnClickListener(v -> {
+            if(progress_is_100){
+                poem_learn_main poem_learn_main= new poem_learn_main();
+                poem_learn_main.getInstance().restart_study();
+            }else{
+                poem_learn_main poem_learn_main= new poem_learn_main();
+                poem_learn_main.getInstance().go_to_level();
+            }
         });
 
        return view;

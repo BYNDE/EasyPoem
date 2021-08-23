@@ -40,11 +40,14 @@ public class MyDbManager {
 
         db.insert(MyConstant.TABLE_NAME,null,cv);
     }
-    public void update_level(String title, String author, int current_level, int current_paragraph){
+    public void update_level(String title, String author, int current_level, int current_paragraph,int paragraphs_number){
         ContentValues newValues = new ContentValues();
         if (current_level == 2 ){
             newValues.put(MyConstant.CURRENT_LEVEL, 0);
-            newValues.put(MyConstant.CURRENT_PARAGRAPH, current_paragraph+1);
+            if(paragraphs_number == current_paragraph + 1) {
+                newValues.put(MyConstant.LEARNED, 1);
+            }
+            newValues.put(MyConstant.CURRENT_PARAGRAPH, current_paragraph + 1);
         }else{
             newValues.put(MyConstant.CURRENT_LEVEL, current_level + 1);
         }
