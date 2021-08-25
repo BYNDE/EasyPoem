@@ -96,7 +96,7 @@ public class PoemRead extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_down, 0);
+        overridePendingTransition(0, 0);
     }
 
     @Override
