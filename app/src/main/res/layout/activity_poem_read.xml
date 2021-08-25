@@ -55,6 +55,7 @@
         android:layout_height="match_parent"
         android:gravity="top"
         android:layout_marginTop="?attr/actionBarSize"
+        android:background="@color/white"
         android:layout_marginBottom="?attr/actionBarSize"
         android:orientation="vertical">
 

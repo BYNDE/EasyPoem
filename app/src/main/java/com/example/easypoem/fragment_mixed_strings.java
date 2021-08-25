@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -35,8 +36,9 @@ public class fragment_mixed_strings extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_mixed_strings, container, false);
 
-        text = new Text(this.getArguments().getString("text"));
         string_text = this.getArguments().getString("text");
+        text = new Text(this.getArguments().getString("text"));
+
         movelist = new ArrayList<>();
         movelist.addAll(Arrays.asList(text.lines));
         Collections.shuffle(movelist);
@@ -44,7 +46,6 @@ public class fragment_mixed_strings extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerAdapter = new RecyclerAdapter(movelist);
         recyclerView.setAdapter(recyclerAdapter);
-
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 

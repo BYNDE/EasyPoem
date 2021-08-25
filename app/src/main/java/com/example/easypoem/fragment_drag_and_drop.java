@@ -95,12 +95,14 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
                 textView.setText(paragraph.words[i]);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextSize(25);
+                textView.setTextColor(getResources().getColor(R.color.gray_hint));
                 flexboxLayout.addView(textView);
             } else {
                 selectTextView = new TextView(getActivity());
                 selectTextView.setText("_______");
                 selectTextView.setGravity(Gravity.CENTER);
                 selectTextView.setTextSize(25);
+                selectTextView.setTextColor(getResources().getColor(R.color.gray_hint));
                 selectTextView.setBackground(ContextCompat.getDrawable(getContext() ,R.drawable.border_word));
                 selectTextView.setId(R.id.word);
                 flexboxLayout.addView(selectTextView);
