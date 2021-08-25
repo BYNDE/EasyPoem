@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.easypoem.learn.Paragraph;
 import com.example.easypoem.learn.Text;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class fragment_mixed_strings extends Fragment {
 
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
-    Text text;
+    Paragraph text;
     List<String> movelist;
     String string_text;
 
@@ -37,7 +38,7 @@ public class fragment_mixed_strings extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mixed_strings, container, false);
 
         string_text = this.getArguments().getString("text");
-        text = new Text(this.getArguments().getString("text"));
+        text = new Paragraph(string_text);
 
         movelist = new ArrayList<>();
         movelist.addAll(Arrays.asList(text.lines));
