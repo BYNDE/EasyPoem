@@ -75,7 +75,7 @@ public class search_activity extends AppCompatActivity implements search_output_
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(final String newText) {
-                search(newText, adapter);
+//                search(newText, adapter);
                 return false;
             }
 
@@ -118,17 +118,18 @@ public class search_activity extends AppCompatActivity implements search_output_
     }
 
     public void search(String newText,search_output_item_adapter adapter){
-        firebase_poems_search(newText, adapter);
+        server_poems_search(newText, adapter);
     }
 
     private void server_poems_search(String str, search_output_item_adapter adapter) {
         states.clear();
-
         HttpClient.getApi().Search(str).enqueue(new Callback<List<PoemModel>>() {
             @Override
             public void onResponse(Call<List<PoemModel>> call, Response<List<PoemModel>> response) {
-                states.addAll(response.body());
-                adapter.notifyDataSetChanged();
+                if (response.body() != null) {
+                    states.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override

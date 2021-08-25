@@ -1,6 +1,7 @@
 package com.example.easypoem.learn;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Text implements Serializable {
@@ -13,20 +14,24 @@ public class Text implements Serializable {
     public Paragraph selectedParagraph;
     public int countLevels;
     public int level;
+    public int lengthParagraphs;
 
 
     public Text(String text) {
         this.text = text;
         words = text.split("\\b");
         lines = text.split("\\n+");
-        if (getLengthParagraphs() != 1 && linearSearch() == 1) {
-            String[] tempParagraph = new String[getLengthParagraphs()];
-            paragraph = new Paragraph[getLengthParagraphs()];
+        lengthParagraphs = getLengthParagraphs();
+        if (lengthParagraphs != 1 && linearSearch() == 1) {
+            String[] tempParagraph = new String[lengthParagraphs];
+            paragraph = new Paragraph[lengthParagraphs];
             tempParagraph[0] = "";
 
-            double src = lines.length / 5;
+            double src = lines.length / 5d;
             int res = (int)src; //целая часть
             double answer = (src - res) * 10;
+            DecimalFormat df = new DecimalFormat("###.#");
+            answer = Double.parseDouble(df.format(answer));
             if (answer >= 5) {
                 answer -= 5;
             }
@@ -36,7 +41,7 @@ public class Text implements Serializable {
             int paragraph_i = 0;
             int i = 1;
 
-            while (paragraph_i < getLengthParagraphs() - 1) {
+            while (paragraph_i < lengthParagraphs - 1) {
                 tempParagraph[paragraph_i] += lines[lines_i++] + "\n";
                 i++;
                 if (lines_i + 1 == lines.length - 1) {
@@ -53,14 +58,14 @@ public class Text implements Serializable {
                 }
             }
             paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i]);
-            countLevels = getLengthParagraphs();
-        } else if (getLengthParagraphs() == 1) {
-            paragraph = new Paragraph[getLengthParagraphs()];
+            countLevels = lengthParagraphs;
+        } else if (lengthParagraphs == 1) {
+            paragraph = new Paragraph[lengthParagraphs];
             paragraph[0] = new Paragraph(text);
             countLevels = 1;
         } else {
-            String[] tempParagraph = new String[getLengthParagraphs()];
-            paragraph = new Paragraph[getLengthParagraphs()];
+            String[] tempParagraph = new String[lengthParagraphs];
+            paragraph = new Paragraph[lengthParagraphs];
             tempParagraph[0] = "";
             int j = 0;
             for (int i = 0; i < lines.length; i++) {
@@ -74,7 +79,7 @@ public class Text implements Serializable {
                 }
             }
             paragraph[j] = new Paragraph(tempParagraph[j]);
-            countLevels = getLengthParagraphs();
+            countLevels = lengthParagraphs;
         }
     }
 
