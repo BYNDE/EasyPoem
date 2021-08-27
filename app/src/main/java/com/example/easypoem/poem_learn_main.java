@@ -32,6 +32,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
     private int progress;
     private MyDbManager myDbManager;
     private boolean button_is_skip;
+    private int current_progress;
 
 
     @Override
@@ -80,7 +81,11 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         last_fragment = fragment;
     }
     public void set_progress(int progress){
+        current_progress = progress;
         progressBar.setProgress(progress);
+    }
+    public int get_current_progress(){
+        return current_progress;
     }
 
 
@@ -172,6 +177,7 @@ public class poem_learn_main extends AppCompatActivity implements View.OnClickLi
         button_is_skip = true;
         int current_level = current_mass[0];
 
+        set_progress(0);
         if (current_level == 0){
             fragment_mixed_strings fragment_mixed_strings= new fragment_mixed_strings();
             fragment_mixed_strings.setArguments(bundle);

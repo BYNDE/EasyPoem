@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,15 @@ public class fragment_mixed_strings extends Fragment {
 
             if (movelist.equals(Arrays.asList(text.lines))) {
                 poem_learn_main poem_learn_main= new poem_learn_main();
-                poem_learn_main.getInstance().go_to_check_progress();
+                poem_learn_main.getInstance().set_progress(100);
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        poem_learn_main.getInstance().go_to_check_progress();
+                    }
+                }, 1000);
+
             }
 
             return true;

@@ -129,7 +129,14 @@ public class fragment_learn_listening extends Fragment implements View.OnClickLi
             @Override
             public void onCompletion(MediaPlayer mp) {
                 poem_learn_main poem_learn_main= new poem_learn_main();
-                poem_learn_main.getInstance().go_to_check_progress();
+                poem_learn_main.getInstance().set_progress(100);
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        poem_learn_main.getInstance().go_to_check_progress();
+                    }
+                }, 1000);
             }
         });
     }

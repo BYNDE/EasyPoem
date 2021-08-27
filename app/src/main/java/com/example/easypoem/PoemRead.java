@@ -50,6 +50,7 @@ public class PoemRead extends AppCompatActivity {
            if_added = true;
            change_add_button(btn_add);
            btn_learn.setEnabled(true);
+           btn_learn.setBackgroundColor( getResources().getColor(R.color.orange));
        }
 
         T_title.setText(getIntent().getExtras().getString("title"));
@@ -86,6 +87,7 @@ public class PoemRead extends AppCompatActivity {
                         getIntent().getExtras().getString("text"),0,paragraphs_number);
                 change_add_button(btn_add);
                 btn_learn.setEnabled(true);
+                btn_learn.setBackgroundColor( getResources().getColor(R.color.orange));
                 if_added = true;
             }
 

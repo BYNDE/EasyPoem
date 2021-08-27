@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -63,8 +64,6 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
 
         selectword();
 
-        poem_learn_main poem_learn_main= new poem_learn_main();
-        poem_learn_main.getInstance().setName("Drag&Drop");
 
         return view;
     }
@@ -81,7 +80,13 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     public void selectword() {
         if (level == countLevels) {
             poem_learn_main poem_learn_main= new poem_learn_main();
-            poem_learn_main.getInstance().go_to_check_progress();
+            Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    poem_learn_main.getInstance().go_to_check_progress();
+                }
+            }, 1000);
             return;
         }
         level++;
@@ -152,8 +157,13 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
                         entered_word.setVisibility(View.VISIBLE);
                     }
                     word_correct = false;
-                    if (word_textview.getText().toString().equals(paragraph.selectedWord))
+                    if (word_textview.getText().toString().equals(paragraph.selectedWord)){
+                        poem_learn_main poem_learn_main= new poem_learn_main();
+                        int progress = poem_learn_main.getInstance().get_current_progress();
+                        poem_learn_main.getInstance().set_progress(progress + 20);
                         selectword();
+                    }
+
                     break;
             }
             return true;

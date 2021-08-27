@@ -30,17 +30,17 @@ public class profile extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        Button exit_button = view.findViewById(R.id.exit);
-
-        exit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent intent = new Intent(getActivity(),Login_or_register.class);
-                startActivity(intent);
-
-            }
-        });
+//        Button exit_button = view.findViewById(R.id.exit);
+//
+//        exit_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAuth.signOut();
+//                Intent intent = new Intent(getActivity(),Login_or_register.class);
+//                startActivity(intent);
+//
+//            }
+//        });
 
         return view;
     }

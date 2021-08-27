@@ -38,9 +38,6 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
         correct_button = view.findViewById(R.id.correct);
         TextView tv_text = view.findViewById(R.id.TV_text);
 
-        poem_learn_main poem_learn_main= new poem_learn_main();
-        poem_learn_main.getInstance().setName("Аудиосуфлёр");
-
 
         tv_text.setText(this.getArguments().getString("text"));
 
@@ -86,7 +83,7 @@ public class fragment_learn_record extends Fragment implements View.OnClickListe
                 fragment_learn_listening fragment_learn_listening = new fragment_learn_listening();
                 fragment_learn_listening.setArguments(bundle);
                 poem_learn_main.getInstance().replace_fragment(fragment_learn_listening);
-                poem_learn_main.getInstance().set_progress(100);
+                poem_learn_main.getInstance().set_progress(50);
                 break;
         }
     }

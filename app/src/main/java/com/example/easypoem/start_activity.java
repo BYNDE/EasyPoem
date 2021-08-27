@@ -16,22 +16,25 @@ public class start_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+//        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//
+//                if (user!= null){
+//                    Intent intent = new Intent(start_activity.this, MainActivity.class);
+//                    startActivity(intent);
+//                }
+//                else{
+//                    Intent intent = new Intent(start_activity.this, Login_or_register.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        };
+//        mAuth.addAuthStateListener(mAuthListener);
 
-                if (user!= null){
-                    Intent intent = new Intent(start_activity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(start_activity.this, Login_or_register.class);
-                    startActivity(intent);
-                }
-            }
-        };
-        mAuth.addAuthStateListener(mAuthListener);
+        Intent intent = new Intent(start_activity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
