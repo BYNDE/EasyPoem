@@ -39,7 +39,6 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
     RecyclerView words_recycler;
     word_item_adapter adapter;
     View entered_word;
-    Text text;
     Paragraph paragraph;
     ArrayList<String> words = new ArrayList<>();
     TextView selectTextView;
@@ -55,12 +54,7 @@ public class fragment_drag_and_drop extends Fragment implements word_item_adapte
 
         words_recycler = view.findViewById(R.id.words_recycler);
         flexboxLayout = view.findViewById(R.id.flex_layout);
-        text = new Text(this.getArguments().getString("text"));
-        paragraph = text.getParagraph();
-        if (paragraph == null) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-        }
+        paragraph = new Paragraph(this.getArguments().getString("text"));
 
         selectword();
 

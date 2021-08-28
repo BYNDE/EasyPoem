@@ -30,12 +30,9 @@ public class Paragraph implements Serializable {
 
         boolean var = true;
 
-        int i = 0;
-
-        while (var & i < 100) {
+        while (var) {
             if ((words[r].matches("([\n ,.:;?!«»…—-])*")) || (words[r].equals(selectedWord))) {
                 r = random.nextInt(words.length);
-                i++;
 //                System.out.println(words[r]);
             } else {
                 var = false;

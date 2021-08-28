@@ -104,7 +104,7 @@ public class Text implements Serializable {
         }
 
         if (j == 1) {
-            double src = lines.length / 5;
+            double src = lines.length / 5d;
             int res = (int)src; //целая часть
             double answer = src - res;
             if (lines.length < 5) {
