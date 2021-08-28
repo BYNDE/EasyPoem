@@ -23,15 +23,11 @@ public class Text implements Serializable {
         lines = text.split("\\n+");
         lengthParagraphs = getLengthParagraphs();
         if (lengthParagraphs != 1 && linearSearch() == 1) {
-            String[] tempParagraph = new String[lengthParagraphs];
+            String tempParagraph = "";
             paragraph = new Paragraph[lengthParagraphs];
-            tempParagraph[0] = "";
 
-            double src = lines.length / 5d;
-            int res = (int)src; //целая часть
-            double answer = (src - res) * 10;
-            DecimalFormat df = new DecimalFormat("###.#");
-            answer = Double.parseDouble(df.format(answer));
+            int src = lines.length / 5;
+            int answer = lines.length - src * 5;
             if (answer >= 5) {
                 answer -= 5;
             }
@@ -41,23 +37,21 @@ public class Text implements Serializable {
             int paragraph_i = 0;
             int i = 1;
 
-            while (paragraph_i < lengthParagraphs - 1) {
-                tempParagraph[paragraph_i] += lines[lines_i++] + "\n";
+            while (paragraph_i < lengthParagraphs) {
+                tempParagraph += lines[lines_i++] + "\n";
                 i++;
-                if (lines_i + 1 == lines.length - 1) {
-                    if (lines_i == 4 + answer) {
-                        paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i++]);
-                        tempParagraph[paragraph_i] = "";
+                if (paragraph_i == lengthParagraphs - 1) {
+                    if (i == 5 + answer) {
+                        paragraph[paragraph_i++] = new Paragraph(tempParagraph);
                     }
                 } else {
                     if (i == 5) {
                         i = 0;
-                        paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i++]);
-                        tempParagraph[paragraph_i] = "";
+                        paragraph[paragraph_i++] = new Paragraph(tempParagraph);
+                        tempParagraph = "";
                     }
                 }
             }
-            paragraph[paragraph_i] = new Paragraph(tempParagraph[paragraph_i]);
             countLevels = lengthParagraphs;
         } else if (lengthParagraphs == 1) {
             paragraph = new Paragraph[lengthParagraphs];
@@ -104,16 +98,16 @@ public class Text implements Serializable {
         }
 
         if (j == 1) {
-            double src = lines.length / 5d;
-            int res = (int)src; //целая часть
-            double answer = src - res;
+            int src = lines.length / 5;
+            int answer = lines.length - src * 5;
+
             if (lines.length < 5) {
                 return 1;
             }else if (lines.length == 5) {
                 return lines.length;
-            } else if (answer == 0 || answer < 0.5f) {
+            } else if (answer == 0 || answer < 5) {
                 return lines.length / 5;
-            } else if (answer != 0 && answer >= 0.5f) {
+            } else if (answer != 0 && answer >= 5) {
                 return lines.length / 5 + 1;
             }
             return 1;
