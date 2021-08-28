@@ -47,8 +47,8 @@ public class check_progress_fragment extends Fragment {
         updateRunnable(progress*100);
 
         if(progress == 100){
-            text_blank.setText("Вы успешно изучили стих");
-            text_tv.setText("Можете пройти его снова");
+            text_blank.setText("Стихотворение изучено");
+            text_tv.setText("Вы можете начать изучать его заново");
             continue_button.setText("Перезапустить");
             progress_is_100 = true;
         } else
