@@ -19,15 +19,14 @@
         android:theme="@style/Theme.EasyPoem">
         <activity android:name=".poem_learn_main" />
         <activity android:name=".Login_or_register" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".start_activity" />
         <activity android:name=".see_all_my_poems" />
         <activity android:name=".PoemRead" />
         <activity android:name=".add_my_poem" />
         <activity android:name=".search_activity" />
         <activity
-            android:name=".start_activity"
-            android:label="@string/app_name"
-            android:theme="@style/StartTheme">
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
