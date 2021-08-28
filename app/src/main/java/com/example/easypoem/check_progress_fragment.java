@@ -22,7 +22,7 @@ import com.example.easypoem.sqlite.MyDbManager;
 public class check_progress_fragment extends Fragment {
 
     private ProgressBar progressBar;
-    private TextView text_tv,progress_tv;
+    private TextView text_tv,progress_tv, text_blank;
     private int progress;
     private Button continue_button;
     private boolean progress_is_100 = false;
@@ -35,20 +35,24 @@ public class check_progress_fragment extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
         text_tv = view.findViewById(R.id.TV_text);
+        text_blank = view.findViewById(R.id.current_poem_text_view);
         progress_tv = view.findViewById(R.id.myTextProgress);
         continue_button = view.findViewById(R.id.button_continue);
 
         progressBar.setMax(10000);
 
-        text_tv.setText(this.getArguments().getString("text"));
+
         progress = this.getArguments().getInt("progress");
         progress_tv.setText(Integer.toString(progress));
         updateRunnable(progress*100);
 
         if(progress == 100){
+            text_blank.setText("Вы успешно изучили стих");
+            text_tv.setText("Можете пройти его снова");
             continue_button.setText("Перезапустить");
             progress_is_100 = true;
-        }
+        } else
+            text_tv.setText(this.getArguments().getString("text"));
 
 
 

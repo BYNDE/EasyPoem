@@ -70,9 +70,11 @@ public class Text implements Serializable {
             int j = 0;
             for (int i = 0; i < lines.length; i++) {
                 if (lines[i].equals(" ")) {
-                    paragraph[j] = new Paragraph(tempParagraph[j]);
-                    j++;
-                    tempParagraph[j] = "";
+                    if (lines.length != i+1) {
+                        paragraph[j] = new Paragraph(tempParagraph[j]);
+                        j++;
+                        tempParagraph[j] = "";
+                    }
                 }
                 if (!lines[i].equals(" ")) {
                     tempParagraph[j] += lines[i] + "\n";
@@ -97,7 +99,8 @@ public class Text implements Serializable {
         int j = 1;
         for (int i = 0; i < lines.length ; i++) {
             if (lines[i].equals(" "))
-                j++;
+                if (lines.length != i+1)
+                    j++;
         }
 
         if (j == 1) {
