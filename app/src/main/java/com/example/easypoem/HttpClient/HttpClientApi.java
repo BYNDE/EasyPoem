@@ -12,4 +12,7 @@ public interface HttpClientApi {
 
     @GET("api/authors/name/{name}")
     Call<List<AuthorModel>> SearchAuthor(@Path("name") String name);
+
+    @GET("api/authors/{id}/poems")
+    Call<List<PoemModel>> GetAllAuthorPoems(@Path("id") int id);
 }

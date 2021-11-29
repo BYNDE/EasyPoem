@@ -14,6 +14,7 @@ import com.example.easypoem.HttpClient.PoemModel;
 import com.example.easypoem.sqlite.MyDbManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class see_all_my_poems extends AppCompatActivity implements search_output_item_adapter.OnNoteListener, View.OnClickListener {
     private MyDbManager myDbManager = new MyDbManager(this);

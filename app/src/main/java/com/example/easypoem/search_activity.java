@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 
+import com.example.easypoem.HttpClient.AuthorModel;
 import com.example.easypoem.HttpClient.HttpClient;
 import com.example.easypoem.HttpClient.PoemModel;
 import com.google.android.material.appbar.AppBarLayout;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,8 +32,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class search_activity extends AppCompatActivity implements search_output_item_adapter.OnNoteListener{
-    ArrayList<PoemModel> states = new ArrayList<PoemModel>();
+public class search_activity extends AppCompatActivity implements search_output_item_adapter_any.OnNoteListener {
+    ArrayList<Object> items = new ArrayList<Object>();
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -53,7 +55,7 @@ public class search_activity extends AppCompatActivity implements search_output_
 
         getSupportActionBar().hide();
 
-        search_output_item_adapter adapter = new search_output_item_adapter(search_activity.this, states, search_activity.this);
+        search_output_item_adapter_any adapter = new search_output_item_adapter_any(search_activity.this, items, this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setAdapter(adapter);
@@ -81,7 +83,7 @@ public class search_activity extends AppCompatActivity implements search_output_
 
             @Override
             public boolean onQueryTextChange(final String newText) {
-                search(newText,adapter);
+                search(newText, adapter);
                 return true;
             }
         });
@@ -117,17 +119,19 @@ public class search_activity extends AppCompatActivity implements search_output_
         overridePendingTransition(0, 0);
     }
 
-    public void search(String newText,search_output_item_adapter adapter){
+    public void search(String newText,search_output_item_adapter_any adapter){
         server_poems_search(newText, adapter);
     }
 
-    private void server_poems_search(String str, search_output_item_adapter adapter) {
-        states.clear();
+    private void server_poems_search(String str, search_output_item_adapter_any adapter) {
+        items.clear();
+
         HttpClient.getApi().Search(str).enqueue(new Callback<List<PoemModel>>() {
             @Override
             public void onResponse(Call<List<PoemModel>> call, Response<List<PoemModel>> response) {
                 if (response.body() != null) {
-                    states.addAll(response.body());
+                    items.addAll(response.body());
+                    adapter.notifyDataSetChanged();
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -137,40 +141,64 @@ public class search_activity extends AppCompatActivity implements search_output_
                 t.printStackTrace();
             }
         });
+
+        HttpClient.getApi().SearchAuthor(str).enqueue(new Callback<List<AuthorModel>>() {
+            @Override
+            public void onResponse(Call<List<AuthorModel>> call, Response<List<AuthorModel>> response) {
+                if (response.body() != null) {
+                    items.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AuthorModel>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
-    private void firebase_poems_search(String str, search_output_item_adapter adapter){
-        states.clear();
-        // Obtain the FirebaseAnalytics instance.
-
-        if (str.length() >= 3) {
-            Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(5);
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                        PoemModel value = ds.getValue(PoemModel.class);
-                        states.add(value);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    throw  error.toException();
-                }
-            });
-        }
-    }
+//    private void firebase_poems_search(String str, search_output_item_adapter adapter){
+//        states.clear();
+//        // Obtain the FirebaseAnalytics instance.
+//
+//        if (str.length() >= 3) {
+//            Query query = FirebaseDatabase.getInstance().getReference("poems").orderByChild("title").startAt(str).endAt(str +"\uf8ff").limitToFirst(5);
+//            query.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
+//                        PoemModel value = ds.getValue(PoemModel.class);
+//                        states.add(value);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError error) {
+//                    // Failed to read value
+//                    throw  error.toException();
+//                }
+//            });
+//        }
+//    }
 
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(this, PoemRead.class);
-        intent.putExtra("title", states.get(position).getTitle());
-        intent.putExtra("text", states.get(position).getText());
-        intent.putExtra("author", states.get(position).getAuthor());
-        startActivity(intent);
-        overridePendingTransition(0, 0);
+        if (items.get(position) instanceof PoemModel) {
+            Intent intent = new Intent(this, PoemRead.class);
+            intent.putExtra("title", ((PoemModel) items.get(position)).getTitle());
+            intent.putExtra("text", ((PoemModel) items.get(position)).getText());
+            intent.putExtra("author", ((PoemModel) items.get(position)).getAuthor());
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        } else if (items.get(position) instanceof AuthorModel) {
+            Log.println(Log.DEBUG, "MSH", "243fgdfg");
+            Intent intent = new Intent(this, all_poems_in_author.class);
+            intent.putExtra("id", ((AuthorModel) items.get(position)).getId());
+            intent.putExtra("name", ((AuthorModel) items.get(position)).getName());
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
     }
 }

@@ -9,14 +9,15 @@
         android:name=".HttpClient.HttpClient"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.EasyPoem">
+        android:theme="@style/Theme.EasyPoem"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".all_poems_in_author"></activity>
         <activity android:name=".poem_learn_main" />
         <activity android:name=".Login_or_register" />
         <activity android:name=".start_activity" />
